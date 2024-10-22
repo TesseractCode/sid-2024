@@ -1,5 +1,6 @@
 const supabase = require('../supabase/supabase-client');
 
+
 // Signup Controller
 exports.signup = async (req, res) => {
     const { email, password } = req.body;
