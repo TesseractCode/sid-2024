@@ -473,18 +473,12 @@ const izolate_data_on_years = (data, target_info) => {
     let result = [];
 
     data.forEach((year_data) => {
-        if (year_data[target_info])
-        {
-            result.push({"year" : year_data["year"], [target_info] : year_data[target_info]});
-        }
-        else if (year_data["data"][target_info])
-        {
-            result.push({"year" : year_data["year"], [target_info] : year_data["data"][target_info]});
-        }
-        else if (year_data["meta"][target_info])
-        {
-            result.push({"year" : year_data["year"], [target_info] : year_data["meta"][target_info]});
-        }
+      let target_year_data = {"year" : year_data["year"]};
+      target_info.forEach((info_name) => 
+      {
+        target_year_data[info_name] = year_data["data"][info_name];
+      })
+      result.push(target_year_data);
     })
 
     // console.log(result);

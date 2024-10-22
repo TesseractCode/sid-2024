@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 
 const apiKey = process.env.ANAF_API_KEY;
-const endpoint = 'https://api.openapi.ro/api/companies/{cif}/balances';
+const endpoint = process.env.ANAF_BALANCES_ENDPOINT;
 
 const fetchData = async(cif) => {
     try {
