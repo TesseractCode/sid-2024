@@ -30,6 +30,4 @@ app.use('/companies', companyRoutes);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
-  // const data = await fetchData(16341004);
-  console.log(izolate_data_on_years(all_data, ["cifra_de_afaceri_neta", "profit_brut", "profit_net"]));
 });
