@@ -48,11 +48,6 @@ const items = [
     url: "/chatbot",
     icon: Bot,
   },
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: Settings,
-  },
 ]
 
 export function AppSidebar() {
