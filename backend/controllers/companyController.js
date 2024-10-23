@@ -20,7 +20,7 @@ exports.searchCompanies = async (req, res) => {
     const response = await axios.post('https://api.openapi.ro/v1/companies/search', requestData, {
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.OPENAPI_KEY, // Include API key in the headers
+        'x-api-key': process.env.OPENAPI_KEY,
       },
     });
 
@@ -43,5 +43,56 @@ exports.searchCompanies = async (req, res) => {
       // Other errors (network issues, etc.)
       res.status(500).json({ error: 'An error occurred while searching for companies.' });
     }
+  }
+};
+
+
+// Controller function to fetch company data
+exports.getCompanyData = async (req, res) => {
+  const { cif } = req.params;
+
+console.log(`https://api.openapi.ro/api/companies/${cif}/balances`);
+
+  try {
+    const response = await axios.get(`https://api.openapi.ro/api/companies/${cif}/balances`, {
+      headers: {
+        'x-api-key': process.env.OPENAPI_KEY, 
+      },
+    });
+
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error('Error fetching company data:', error.message);
+
+    if (error.response) {
+      res.status(error.response.status).json({ error: error.response.data.message });
+    } else {
+      res.status(500).json({ error: 'An error occurred while fetching company data.' });
+    }
+  }
+};
+
+
+// Controller to fetch company data for a specific CIF and year
+exports.getCompanyDataByYear = async (req, res) => {
+  const { cif, year } = req.params; 
+
+  try {
+    const response = await axios.get(`https://api.openapi.ro/api/companies/${cif}/balances/${year}`, {
+      headers: {
+        'x-api-key': process.env.OPENAPI_KEY,
+      },
+    });
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error('Error fetching company data:', error.message);
+
+    if (error.response) {
+      return res.status(error.response.status).json({ error: error.response.data.message });
+    }
+
+    res.status(500).json({ error: 'An error occurred while fetching company data.' });
   }
 };
