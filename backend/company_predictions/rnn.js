@@ -137,7 +137,7 @@ const run = async () => {
     console.log(results);
 }
 
-run();
+// run();
 
 
 module.exports = { run };

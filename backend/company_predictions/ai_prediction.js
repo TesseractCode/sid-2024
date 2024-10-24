@@ -6,10 +6,13 @@ async function get_company_prediction(company_name, cif) {
             company_name: company_name,
             cif: cif
         });
-
-        console.log('Response from Python:', response.data.ai_prediction);
+        
+        let result = response.data.ai_prediction
+        // console.log('Response from Python:', result);
+        return result;
     } catch (error) {
         console.error('Error calling Python API:', error);
+        return error;
     }
 }
 
