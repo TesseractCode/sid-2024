@@ -34,9 +34,9 @@ app.use('/api/companies', companyRoutes);
 app.use('/api', exchangeRoutes);
 
 // External Search Routes
-app.use('/api/external', externalSearchRoutes);
-
-app.use('/api', cnpRoutes);
+app.use('/public', externalSearchRoutes);
+// Validate CNP Routes
+app.use('/public', cnpRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
