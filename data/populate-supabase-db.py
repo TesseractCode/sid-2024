@@ -2,9 +2,10 @@ import csv
 import json
 
 # Path to your input CSV file and output CSV files
-csv_file = 'Results/Sibiu-2023.csv'  # Ensure this path is correct and the file exists
-output_companies_file = 'companies_output.csv'
-output_indicators_file = 'company_indicators_output.csv'
+csv_file = 'Results/results_Sibiu_2023.csv'  # Ensure this path is correct and the file exists
+output_companies_file = 'FinalDatasets/companiesDataset/sibiu-companies.csv'
+output_indicators_file = 'FinalDatasets/Sibiu/sibiu-indicators-2023.csv'
+output_invalid_names_file = 'FinalDatasets/invalidNames/sibiu-invalid-names.csv'  # New file for invalid names
 
 
 # Function to write companies data to the companies CSV file
@@ -41,9 +42,21 @@ def write_indicators_csv(indicators_data):
             ])
 
 
+# Function to write invalid company names to a CSV file
+def write_invalid_names(invalid_names_data):
+    with open(output_invalid_names_file, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        # Write header
+        writer.writerow(["cif"])
+        # Write rows
+        for cif in invalid_names_data:
+            writer.writerow([cif])
+
+
 # Read the CSV file, sort by CIF, and process
 companies_data = []
 indicators_data = []
+invalid_names_data = []  # List to hold CIFs of companies with invalid names
 
 with open(csv_file, newline='', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
@@ -58,8 +71,10 @@ with open(csv_file, newline='', encoding='utf-8') as csvfile:
         caen_description = row['CAEN Description']
         indicators = row['Indicators']
 
-        # Skip rows with missing or invalid CIF or relevant data
-        if not cif or not company_name or not caen_code or not caen_description:
+        # Skip rows with missing or invalid CIF, relevant data, or null company name
+        if not cif or not company_name or not caen_code or not caen_description or company_name == 'NULL':
+            if company_name == 'NULL':  # If company name is null, store CIF
+                invalid_names_data.append(cif)
             continue
 
         # Append company data
@@ -70,8 +85,8 @@ with open(csv_file, newline='', encoding='utf-8') as csvfile:
             "caen_description": caen_description
         })
 
-        # Initialize the indicator values
-        indicator_values = {f"I{i}": None for i in range(1, 21)}  # Create variables I1 to I20, all set to None
+        # Initialize local variables for indicators
+        I1 = I2 = I3 = I4 = I5 = I6 = I7 = I8 = I9 = I10 = I11 = I12 = I13 = I14 = I15 = I16 = I17 = I18 = I19 = I20 = None
 
         # Transform the indicators string into valid JSON
         if indicators and indicators != 'NULL':
@@ -86,12 +101,53 @@ with open(csv_file, newline='', encoding='utf-8') as csvfile:
                 # Parse the JSON
                 indicators_list = json.loads(valid_json_string)
 
-                # Extract val_indicator from indicators list and categorize them
+                # Extract val_indicator from indicators list and assign to local variables
                 for d in indicators_list:
                     if 'indicator' in d and 'val_indicator' in d:
-                        indicator_num = int(d['indicator'][1:])  # Get the indicator number
-                        indicator_values[f"I{indicator_num}"] = d[
-                            'val_indicator']  # Set the value for the corresponding indicator
+                        # Get the indicator number (e.g., "I20" -> 20)
+                        indicator_num = int(d['indicator'][1:])  # Extract number from "I20"
+                        value = d['val_indicator']
+                        # Assign the value to the corresponding variable based on the indicator number
+                        if indicator_num == 1:
+                            I1 = value
+                        elif indicator_num == 2:
+                            I2 = value
+                        elif indicator_num == 3:
+                            I3 = value
+                        elif indicator_num == 4:
+                            I4 = value
+                        elif indicator_num == 5:
+                            I5 = value
+                        elif indicator_num == 6:
+                            I6 = value
+                        elif indicator_num == 7:
+                            I7 = value
+                        elif indicator_num == 8:
+                            I8 = value
+                        elif indicator_num == 9:
+                            I9 = value
+                        elif indicator_num == 10:
+                            I10 = value
+                        elif indicator_num == 11:
+                            I11 = value
+                        elif indicator_num == 12:
+                            I12 = value
+                        elif indicator_num == 13:
+                            I13 = value
+                        elif indicator_num == 14:
+                            I14 = value
+                        elif indicator_num == 15:
+                            I15 = value
+                        elif indicator_num == 16:
+                            I16 = value
+                        elif indicator_num == 17:
+                            I17 = value
+                        elif indicator_num == 18:
+                            I18 = value
+                        elif indicator_num == 19:
+                            I19 = value
+                        elif indicator_num == 20:
+                            I20 = value
             except (json.JSONDecodeError, KeyError, TypeError) as e:
                 print(f"Error parsing indicators for CIF {cif}: {e}")
 
@@ -99,11 +155,31 @@ with open(csv_file, newline='', encoding='utf-8') as csvfile:
         indicators_data.append({
             "cif": cif,
             "year": 2023,  # Default to 2023
-            **indicator_values  # Expand the dictionary to include all iN values
+            "i1": I1,
+            "i2": I2,
+            "i3": I3,
+            "i4": I4,
+            "i5": I5,
+            "i6": I6,
+            "i7": I7,
+            "i8": I8,
+            "i9": I9,
+            "i10": I10,
+            "i11": I11,
+            "i12": I12,
+            "i13": I13,
+            "i14": I14,
+            "i15": I15,
+            "i16": I16,
+            "i17": I17,
+            "i18": I18,
+            "i19": I19,
+            "i20": I20
         })
 
 # Write the results to CSVs
 write_companies_csv(companies_data)
 write_indicators_csv(indicators_data)
+write_invalid_names(invalid_names_data)  # Write invalid names to the new CSV file
 
 print("Data written to CSVs successfully.")

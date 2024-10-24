@@ -8,6 +8,7 @@ const companyRoutes = require('./routes/companyRoutes');
 const exchangeRoutes = require('./routes/exchangeRoutes');
 const externalSearchRoutes = require('./routes/externalSearchRoutes');
 const cnpRoutes = require('./routes/cnpRoutes');
+const companySearchRoutes = require('./routes/companySearchRoutes')
 
 require('dotenv').config();
 
@@ -38,6 +39,9 @@ app.use('/public', externalSearchRoutes);
 
 // Validate CNP Routes
 app.use('/public', cnpRoutes);
+
+app.use('/api/', companySearchRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
