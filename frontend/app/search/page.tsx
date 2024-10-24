@@ -152,9 +152,38 @@ function Page() {
   };
 
 
-  const handleCautCif = () => {
-    console.log('Cautare dupa CIF');
+  const handleCautCif = async () => {
+    setError(''); // Clear previous error
+    setSearchResults([]); // Reset search results
+    setCurrentPage(1); // Reset pagination
+  
+    if (!companyName || companyName.length < 2) { // CIF should have a minimum length check
+      setError("Please enter a valid CIF.");
+      return;
+    }
+  
+    try {
+      const response = await fetch(`http://localhost:3000/api/companies/${companyName}/balances`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log(data)
+        setSearchResults([data]); // Assuming `data` is a single company object
+      } else {
+        setError(data.error || 'No company found with the provided CIF.');
+      }
+    } catch (error) {
+      setError('An error occurred while fetching the company data.');
+    }
   };
+  
 
   const handleCautCui = () => {
     console.log('Cautare dupa CUI');
