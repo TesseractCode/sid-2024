@@ -1,0 +1,1347 @@
+{
+  "172.64.198.18": {
+    "port": "80",
+    "location": "United States",
+    "speed": "200 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "172.67.193.205": {
+    "port": "80",
+    "location": "",
+    "speed": "200 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "172.67.179.125": {
+    "port": "80",
+    "location": "",
+    "speed": "140 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "91.222.238.112": {
+    "port": "80",
+    "location": "Russian Federation St Petersburg",
+    "speed": "1880 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "45.6.101.98": {
+    "port": "4153",
+    "location": "Brazil Rio de Janeiro",
+    "speed": "1220 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "41.204.53.17": {
+    "port": "80",
+    "location": "Ghana Accra",
+    "speed": "820 ms",
+    "type": "HTTP",
+    "anonymity": "LOW"
+  },
+  "185.159.153.234": {
+    "port": "80",
+    "location": "Iran",
+    "speed": "340 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "185.46.97.75": {
+    "port": "1080",
+    "location": "Russian Federation",
+    "speed": "1340 ms",
+    "type": "SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "172.64.151.24": {
+    "port": "80",
+    "location": "United States",
+    "speed": "660 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "206.220.175.2": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1120 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "24.249.199.4": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "75.81.166.118": {
+    "port": "39593",
+    "location": "United States Lenexa",
+    "speed": "4000 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "162.223.90.130": {
+    "port": "80",
+    "location": "United States Buffalo",
+    "speed": "620 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "70.166.167.55": {
+    "port": "57745",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "74.119.147.209": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "960 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "184.181.217.220": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1560 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "143.42.66.91": {
+    "port": "80",
+    "location": "Singapore Singapore",
+    "speed": "3340 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "148.66.6.210": {
+    "port": "80",
+    "location": "Hong Kong",
+    "speed": "800 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "67.43.228.250": {
+    "port": "32405",
+    "location": "Canada",
+    "speed": "2800 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "87.248.129.26": {
+    "port": "80",
+    "location": "United Arab Emirates Dubai",
+    "speed": "740 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "110.77.145.159": {
+    "port": "4145",
+    "location": "Thailand Chon Buri",
+    "speed": "1200 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "160.154.123.165": {
+    "port": "4153",
+    "location": "Cote D'Ivoire Abidjan",
+    "speed": "3860 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "45.131.4.168": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "154.65.39.7": {
+    "port": "80",
+    "location": "Senegal",
+    "speed": "3060 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "45.131.4.61": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "200 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.131": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "1240 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "91.192.2.100": {
+    "port": "60606",
+    "location": "Poland Gliwice",
+    "speed": "1400 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "45.131.4.160": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.120": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.46": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.55": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "1120 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "72.167.46.207": {
+    "port": "1080",
+    "location": "United States",
+    "speed": "2640 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "72.37.217.3": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1020 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "45.131.4.37": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "80.65.80.230": {
+    "port": "5678",
+    "location": "Bosnia and Herzegovina Sarajevo",
+    "speed": "540 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "45.131.4.245": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "280 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.67": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.94": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "280 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.66": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "280 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.76": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "280 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.113": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "380 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.236": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "51.158.105.157": {
+    "port": "16379",
+    "location": "France Paris",
+    "speed": "5100 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "34.81.160.132": {
+    "port": "80",
+    "location": "Taiwan Taipei",
+    "speed": "5100 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "45.131.4.249": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "180 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.232": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "120 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.143": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.108": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.178": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.14": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.93": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "420 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.17": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.175": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.172": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "320 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.176": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "80 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.142": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.248": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "160 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.237": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.35": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.58": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "220 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.122": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.90": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.226": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "120 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.197": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "220 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.13": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "120 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.15": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "200 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "72.195.34.42": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "81.12.157.98": {
+    "port": "5678",
+    "location": "Romania Miercurea-Ciuc",
+    "speed": "520 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "66.29.154.103": {
+    "port": "1080",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "178.63.180.104": {
+    "port": "3128",
+    "location": "Germany Falkenstein",
+    "speed": "4160 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "98.170.57.249": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "81.91.151.146": {
+    "port": "3128",
+    "location": "Iran",
+    "speed": "400 ms",
+    "type": "HTTPS",
+    "anonymity": "HIGH"
+  },
+  "162.253.68.97": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "212.70.154.240": {
+    "port": "8080",
+    "location": "Bulgaria Kameno",
+    "speed": "320 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "201.91.82.155": {
+    "port": "3128",
+    "location": "Brazil São Paulo",
+    "speed": "2720 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "142.54.237.34": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1440 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "72.195.101.99": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "860 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "104.200.135.46": {
+    "port": "4145",
+    "location": "United States Los Angeles",
+    "speed": "1040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "104.200.152.30": {
+    "port": "4145",
+    "location": "United States Los Angeles",
+    "speed": "1040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "38.113.171.88": {
+    "port": "57775",
+    "location": "Canada Toronto",
+    "speed": "660 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "103.63.190.72": {
+    "port": "8080",
+    "location": "Cambodia Phnom Penh",
+    "speed": "920 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "102.132.46.209": {
+    "port": "8080",
+    "location": "South Africa Sebokeng",
+    "speed": "880 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "62.182.204.81": {
+    "port": "88",
+    "location": "Russian Federation",
+    "speed": "240 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "43.132.219.102": {
+    "port": "80",
+    "location": "Hong Kong Hong Kong",
+    "speed": "840 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "114.130.153.122": {
+    "port": "58080",
+    "location": "Bangladesh Dhaka",
+    "speed": "5100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "142.54.237.38": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1800 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "47.241.43.44": {
+    "port": "7777",
+    "location": "Singapore Singapore",
+    "speed": "3980 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "68.71.241.33": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1180 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "174.64.199.79": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "58.246.58.150": {
+    "port": "9002",
+    "location": "",
+    "speed": "840 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "174.77.111.198": {
+    "port": "49547",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "202.142.145.179": {
+    "port": "80",
+    "location": "Pakistan",
+    "speed": "1360 ms",
+    "type": "HTTP",
+    "anonymity": "LOW"
+  },
+  "174.77.111.196": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "139.162.78.109": {
+    "port": "1080",
+    "location": "Japan Tokyo",
+    "speed": "3560 ms",
+    "type": "SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "78.80.228.150": {
+    "port": "80",
+    "location": "Czech Republic Brno",
+    "speed": "260 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "68.71.254.6": {
+    "port": "4145",
+    "location": "",
+    "speed": "1060 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "198.49.68.80": {
+    "port": "80",
+    "location": "United States",
+    "speed": "620 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "23.247.136.245": {
+    "port": "80",
+    "location": "Singapore Singapore",
+    "speed": "1320 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "142.54.236.97": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "72.10.164.178": {
+    "port": "26213",
+    "location": "Canada",
+    "speed": "4080 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "45.82.13.227": {
+    "port": "1080",
+    "location": "Sweden Stockholm",
+    "speed": "2040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "68.71.245.206": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "201.221.134.74": {
+    "port": "5678",
+    "location": "Colombia Medellín",
+    "speed": "1060 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "98.181.137.80": {
+    "port": "4145",
+    "location": "United States Las Vegas",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "203.95.199.159": {
+    "port": "8080",
+    "location": "Cambodia Phnom Penh",
+    "speed": "940 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "103.216.50.224": {
+    "port": "8080",
+    "location": "Cambodia Phnom Penh",
+    "speed": "940 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "142.54.231.38": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1080 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "79.110.196.145": {
+    "port": "8081",
+    "location": "Poland Wroclaw",
+    "speed": "220 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "192.111.139.162": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "2040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "160.86.242.23": {
+    "port": "8080",
+    "location": "Japan Osaka",
+    "speed": "1320 ms",
+    "type": "HTTP, HTTPS",
+    "anonymity": "HIGH"
+  },
+  "82.202.90.29": {
+    "port": "60606",
+    "location": "Czech Republic Milovice",
+    "speed": "260 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "174.77.111.197": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "78.28.152.113": {
+    "port": "80",
+    "location": "Bosnia and Herzegovina",
+    "speed": "3620 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "91.226.79.220": {
+    "port": "5678",
+    "location": "",
+    "speed": "360 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "203.81.87.186": {
+    "port": "5678",
+    "location": "Myanmar Dawei",
+    "speed": "2260 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "36.67.56.18": {
+    "port": "60606",
+    "location": "Indonesia Malang",
+    "speed": "4580 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "45.181.88.146": {
+    "port": "4153",
+    "location": "Brazil São Borja",
+    "speed": "1260 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "72.195.114.184": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "860 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "183.100.14.134": {
+    "port": "8000",
+    "location": "Korea Suwon",
+    "speed": "1340 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "43.153.208.148": {
+    "port": "3128",
+    "location": "Singapore Singapore",
+    "speed": "2040 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "85.132.37.9": {
+    "port": "1313",
+    "location": "Azerbaijan Baku",
+    "speed": "380 ms",
+    "type": "HTTPS",
+    "anonymity": "HIGH"
+  },
+  "199.102.105.242": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1140 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "202.166.206.205": {
+    "port": "60606",
+    "location": "Nepal Kathmandu",
+    "speed": "1980 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "67.201.33.10": {
+    "port": "25283",
+    "location": "United States Pico Rivera",
+    "speed": "1180 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "184.178.172.17": {
+    "port": "4145",
+    "location": "United States Choctaw",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "95.66.138.21": {
+    "port": "8880",
+    "location": "Russian Federation Vladimir",
+    "speed": "1060 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "185.49.31.207": {
+    "port": "8081",
+    "location": "Poland Wroclaw",
+    "speed": "220 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "122.151.54.147": {
+    "port": "80",
+    "location": "Australia Melbourne",
+    "speed": "1320 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  {
+  "45.131.4.13": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "120 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "45.131.4.15": {
+    "port": "80",
+    "location": "Netherlands",
+    "speed": "200 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "72.195.34.42": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "81.12.157.98": {
+    "port": "5678",
+    "location": "Romania Miercurea-Ciuc",
+    "speed": "520 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "66.29.154.103": {
+    "port": "1080",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "178.63.180.104": {
+    "port": "3128",
+    "location": "Germany Falkenstein",
+    "speed": "4160 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "98.170.57.249": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "81.91.151.146": {
+    "port": "3128",
+    "location": "Iran",
+    "speed": "400 ms",
+    "type": "HTTPS",
+    "anonymity": "HIGH"
+  },
+  "162.253.68.97": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "212.70.154.240": {
+    "port": "8080",
+    "location": "Bulgaria Kameno",
+    "speed": "320 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "201.91.82.155": {
+    "port": "3128",
+    "location": "Brazil São Paulo",
+    "speed": "2720 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "142.54.237.34": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1440 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "72.195.101.99": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "860 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "104.200.135.46": {
+    "port": "4145",
+    "location": "United States Los Angeles",
+    "speed": "1040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "104.200.152.30": {
+    "port": "4145",
+    "location": "United States Los Angeles",
+    "speed": "1040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "38.113.171.88": {
+    "port": "57775",
+    "location": "Canada Toronto",
+    "speed": "660 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "103.63.190.72": {
+    "port": "8080",
+    "location": "Cambodia Phnom Penh",
+    "speed": "920 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "102.132.46.209": {
+    "port": "8080",
+    "location": "South Africa Sebokeng",
+    "speed": "880 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "62.182.204.81": {
+    "port": "88",
+    "location": "Russian Federation",
+    "speed": "240 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "43.132.219.102": {
+    "port": "80",
+    "location": "Hong Kong Hong Kong",
+    "speed": "840 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "114.130.153.122": {
+    "port": "58080",
+    "location": "Bangladesh Dhaka",
+    "speed": "5100 ms",
+    "type": "HTTP",
+    "anonymity": "NO"
+  },
+  "142.54.237.38": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1800 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "47.241.43.44": {
+    "port": "7777",
+    "location": "Singapore Singapore",
+    "speed": "3980 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "68.71.241.33": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1180 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "174.64.199.79": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "58.246.58.150": {
+    "port": "9002",
+    "location": "",
+    "speed": "840 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "174.77.111.198": {
+    "port": "49547",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "202.142.145.179": {
+    "port": "80",
+    "location": "Pakistan",
+    "speed": "1360 ms",
+    "type": "HTTP",
+    "anonymity": "LOW"
+  },
+  "174.77.111.196": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "139.162.78.109": {
+    "port": "1080",
+    "location": "Japan Tokyo",
+    "speed": "3560 ms",
+    "type": "SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "78.80.228.150": {
+    "port": "80",
+    "location": "Czech Republic Brno",
+    "speed": "260 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "68.71.254.6": {
+    "port": "4145",
+    "location": "",
+    "speed": "1060 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "198.49.68.80": {
+    "port": "80",
+    "location": "United States",
+    "speed": "620 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "23.247.136.245": {
+    "port": "80",
+    "location": "Singapore Singapore",
+    "speed": "1320 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "142.54.236.97": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "72.10.164.178": {
+    "port": "26213",
+    "location": "Canada",
+    "speed": "4080 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "45.82.13.227": {
+    "port": "1080",
+    "location": "Sweden Stockholm",
+    "speed": "2040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "68.71.245.206": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1160 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "201.221.134.74": {
+    "port": "5678",
+    "location": "Colombia Medellín",
+    "speed": "1060 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "98.181.137.80": {
+    "port": "4145",
+    "location": "United States Las Vegas",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "203.95.199.159": {
+    "port": "8080",
+    "location": "Cambodia Phnom Penh",
+    "speed": "940 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "103.216.50.224": {
+    "port": "8080",
+    "location": "Cambodia Phnom Penh",
+    "speed": "940 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "142.54.231.38": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1080 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "79.110.196.145": {
+    "port": "8081",
+    "location": "Poland Wroclaw",
+    "speed": "220 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "192.111.139.162": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "2040 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "160.86.242.23": {
+    "port": "8080",
+    "location": "Japan Osaka",
+    "speed": "1320 ms",
+    "type": "HTTP, HTTPS",
+    "anonymity": "HIGH"
+  },
+  "82.202.90.29": {
+    "port": "60606",
+    "location": "Czech Republic Milovice",
+    "speed": "260 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "174.77.111.197": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "78.28.152.113": {
+    "port": "80",
+    "location": "Bosnia and Herzegovina",
+    "speed": "3620 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "91.226.79.220": {
+    "port": "5678",
+    "location": "",
+    "speed": "360 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "203.81.87.186": {
+    "port": "5678",
+    "location": "Myanmar Dawei",
+    "speed": "2260 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "36.67.56.18": {
+    "port": "60606",
+    "location": "Indonesia Malang",
+    "speed": "4580 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "45.181.88.146": {
+    "port": "4153",
+    "location": "Brazil São Borja",
+    "speed": "1260 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "72.195.114.184": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "860 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "183.100.14.134": {
+    "port": "8000",
+    "location": "Korea Suwon",
+    "speed": "1340 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "43.153.208.148": {
+    "port": "3128",
+    "location": "Singapore Singapore",
+    "speed": "2040 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "85.132.37.9": {
+    "port": "1313",
+    "location": "Azerbaijan Baku",
+    "speed": "380 ms",
+    "type": "HTTPS",
+    "anonymity": "HIGH"
+  },
+  "199.102.105.242": {
+    "port": "4145",
+    "location": "United States",
+    "speed": "1140 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "202.166.206.205": {
+    "port": "60606",
+    "location": "Nepal Kathmandu",
+    "speed": "1980 ms",
+    "type": "SOCKS4",
+    "anonymity": "HIGH"
+  },
+  "67.201.33.10": {
+    "port": "25283",
+    "location": "United States Pico Rivera",
+    "speed": "1180 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "184.178.172.17": {
+    "port": "4145",
+    "location": "United States Choctaw",
+    "speed": "880 ms",
+    "type": "SOCKS4, SOCKS5",
+    "anonymity": "HIGH"
+  },
+  "95.66.138.21": {
+    "port": "8880",
+    "location": "Russian Federation Vladimir",
+    "speed": "1060 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "185.49.31.207": {
+    "port": "8081",
+    "location": "Poland Wroclaw",
+    "speed": "220 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  },
+  "122.151.54.147": {
+    "port": "80",
+    "location": "Australia Melbourne",
+    "speed": "1320 ms",
+    "type": "HTTP",
+    "anonymity": "HIGH"
+  }
+}
