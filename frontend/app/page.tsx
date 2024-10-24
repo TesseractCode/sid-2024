@@ -39,6 +39,7 @@ export default function Home() {
         WELCOME!
       </header>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+
         <Button className="bg-primary text-primary-foreground rounded-full w-32 h-10 flex items-center justify-center"
           onClick={handlePushLogIn}>
           Log In
