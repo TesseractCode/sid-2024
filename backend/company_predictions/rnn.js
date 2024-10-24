@@ -48,10 +48,29 @@ async function trainModel(model, xTrain, yTrain) {
 }
 
 const itp_cif = 16341004;
+const tarom_cif = 23528022;
+const la_doi_pasi_cif = 15600976;
 
 const run = async () => {
     const fetched_data = await fetchData(itp_cif);
-    const features = ['cifra_de_afaceri_neta', 'profit_brut'];
+    const features = ['cifra_de_afaceri_neta', 'profit_net', 'numar_mediu_de_salariati'];
+
+    // const features = [
+    //     'active_circulante_total',
+    //     'active_imobilizate_total',
+    //     'capitaluri_total',
+    //     'casa_si_conturi',
+    //     'cheltuieli_in_avans',
+    //     'cheltuieli_totale',
+    //     'cifra_de_afaceri_neta',
+    //     'creante',
+    //     'datorii_total',
+    //     'numar_mediu_de_salariati',
+    //     'profit_brut',
+    //     'profit_net',
+    //     'venituri_totale'
+    // ];
+
     const izolated_data = await izolate_data_on_years(fetched_data, features);
     console.log(izolated_data);
 
