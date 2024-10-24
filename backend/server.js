@@ -6,6 +6,8 @@ const authRoutes = require('./routes/authRoutes');
 const protectedRoutes = require('./routes/protectedRoutes');
 const companyRoutes = require('./routes/companyRoutes'); 
 const exchangeRoutes = require('./routes/exchangeRoutes');
+const externalSearchRoutes = require('./routes/externalSearchRoutes');
+const cnpRoutes = require('./routes/cnpRoutes');
 
 require('dotenv').config();
 
@@ -30,6 +32,11 @@ app.use('/api/companies', companyRoutes);
 
 // Exchange Routes
 app.use('/api', exchangeRoutes);
+
+// External Search Routes
+app.use('/api/external', externalSearchRoutes);
+
+app.use('/api', cnpRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
