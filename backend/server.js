@@ -40,7 +40,7 @@ app.use('/public', externalSearchRoutes);
 // Validate CNP Routes
 app.use('/public', cnpRoutes);
 
-app.use('/api/', companySearchRoutes);
+app.use('/api', companySearchRoutes);
 
 
 const PORT = process.env.PORT || 3000;
