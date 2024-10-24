@@ -34,6 +34,8 @@ function Page() {
   const [selectedOption, setSelectedOption] = useState('caut-simpla')
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const [popFlag, setPopFlag] = useState(false);
+  const [isCifSearch, setIsCifSearch] = useState(false); // Tracks if the current search is for CIF
+
 
   const resultRef = useRef<HTMLDivElement>(null); // Reference to the result section
   const detaliiButtonRef = useRef<HTMLButtonElement>(null); // Add a reference for the button
@@ -62,6 +64,7 @@ function Page() {
     setError(''); // Clear any previous error
     setSearchResults([]); // Reset search results
     setCurrentPage(1); // Reset pagination
+    setIsCifSearch(false);
   
     // Check if the input is valid
     if (!companyName || companyName.length < 3) {
@@ -95,6 +98,7 @@ function Page() {
     setError(''); // Reset any previous error
     setSearchResults([]); // Reset previous results
     setCurrentPage(1);
+    setIsCifSearch(false);
 
     // Hardcoded dummy data for testing purposes
     if (companyName === 'aaa' && judet === 'aaa') {
@@ -153,11 +157,12 @@ function Page() {
 
 
   const handleCautCif = async () => {
-    setError(''); // Clear previous error
-    setSearchResults([]); // Reset search results
-    setCurrentPage(1); // Reset pagination
+    setError('');
+    setSearchResults([]); 
+    setCurrentPage(1); 
+    setIsCifSearch(true); // Mark this search as CIF search
   
-    if (!companyName || companyName.length < 2) { // CIF should have a minimum length check
+    if (!companyName || companyName.length < 2) {
       setError("Please enter a valid CIF.");
       return;
     }
@@ -174,8 +179,7 @@ function Page() {
       const data = await response.json();
   
       if (response.ok) {
-        console.log(data)
-        setSearchResults([data]); // Assuming `data` is a single company object
+        setSearchResults(data); // Store the array of data directly
       } else {
         setError(data.error || 'No company found with the provided CIF.');
       }
@@ -183,6 +187,8 @@ function Page() {
       setError('An error occurred while fetching the company data.');
     }
   };
+  
+  
   
 
   const handleCautCui = () => {
@@ -283,77 +289,90 @@ function Page() {
         <div ref={resultRef} className="w-full">
           {error && <p className="text-red-500">{error}</p>}
           {searchResults.length > 0 && (
-            <>
-            
-              <Accordion type="single" collapsible className="mt-20 w-full pb-12">
-                {currentItems.map((company, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="flex-grow mb-4 text-left justify-start items-start">
-                    <AccordionTrigger className="text-2xl p-4 font-bold rounded-lg text-left">
-                      {company.denumire} ({company.judet})
-                    </AccordionTrigger>
-                    <AccordionContent className="p-6 text-lg">
-                      <p><strong>Judet:</strong> {company.judet}</p>
-                      <p><strong>CIF:</strong> {company.cif}</p>
-                      <div className='flex justify-center items-center'>
-                      <Popover>
-                        <PopoverTrigger> 
-                        <Button
-                            className="bg-primary text-primary-foreground rounded-full w-32 h-10 flex items-center justify-center"
-                            onClick={() => {
-                              setTimeout(() => {
-                                detaliiButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                              }, 20); // Timeout to wait for the popover to open and render
-                            }}
-                            ref={detaliiButtonRef}>
-                            Detalii
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                          <Card className="w-[80vh] mx-auto h-[80vh] mb-8"></Card>
-                        </PopoverContent>
-                      </Popover>
-                      </div>
-                      {/* <Button
-                        className="bg-primary text-primary-foreground rounded-full w-32 h-10 flex items-center justify-center"
-                        onClick={handlePopOver}
-                      >
-                        Details
-                      </Button> */}
-                      {/* <Link
-                        href={`/grafic?company=${encodeURIComponent(company.denumire)}`}
-                        className="mt-4 inline-block px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-                      >
-                        View Graph
-                      </Link> */}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+  <>
+    {isCifSearch ? (
+      <Accordion type="single" collapsible className="mt-20 w-full pb-12">
+        {searchResults.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((company, index) => (
+          <AccordionItem key={index} value={`item-${index}`} className="flex-grow mb-4 text-left justify-start items-start">
+            <AccordionTrigger className="text-2xl p-4 font-bold rounded-lg text-left">
+              CIF: {company.cif} - Year: {company.year}
+            </AccordionTrigger>
+            <AccordionContent className="p-6 text-lg">
+              <p><strong>CAEN Code:</strong> {company.caen_code}</p>
+              <p><strong>CAEN Description:</strong> {company.data.caen_descriere}</p>
+              <p><strong>Year:</strong> {company.year}</p>
+              <p><strong>CIF:</strong> {company.cif}</p>
 
-              <Pagination>
-                <PaginationPrevious
-                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                  className={currentPage === 1 ? 'hidden' : ''}
-                />
-                <PaginationContent>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <PaginationItem key={page}>
-                      <PaginationLink
-                        isActive={page === currentPage}
-                        onClick={() => setCurrentPage(page)}
-                      >
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                </PaginationContent>
-                <PaginationNext
-                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                  className={currentPage === totalPages ? 'hidden' : ''}
-                />
-              </Pagination>
-            </>
-          )}
+              <h3 className="font-bold mt-4">Financial Data for {company.year}:</h3>
+              <p><strong>Active Circulante Total:</strong> {company.data.active_circulante_total}</p>
+              <p><strong>Active Imobilizate Total:</strong> {company.data.active_imobilizate_total}</p>
+              <p><strong>Capitaluri Total:</strong> {company.data.capitaluri_total}</p>
+              <p><strong>Casa si Conturi:</strong> {company.data.casa_si_conturi}</p>
+              <p><strong>Cheltuieli Totale:</strong> {company.data.cheltuieli_totale}</p>
+              <p><strong>Cifra de Afaceri Neta:</strong> {company.data.cifra_de_afaceri_neta}</p>
+              <p><strong>Creante:</strong> {company.data.creante}</p>
+              <p><strong>Datorii Total:</strong> {company.data.datorii_total}</p>
+              <p><strong>Profit Brut:</strong> {company.data.profit_brut}</p>
+              <p><strong>Profit Net:</strong> {company.data.profit_net}</p>
+              <p><strong>Numar Mediu de Salariati:</strong> {company.data.numar_mediu_de_salariati}</p>
+
+              <h3 className="font-bold mt-4">Meta Information:</h3>
+              <p><strong>Last Updated:</strong> {new Date(company.meta.updated_at).toLocaleDateString()}</p>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    ) : (
+      // Regular company data display logic for non-CIF searches
+      <Accordion type="single" collapsible className="mt-20 w-full pb-12">
+        {currentItems.map((company, index) => (
+          <AccordionItem key={index} value={`item-${index}`} className="flex-grow mb-4 text-left justify-start items-start">
+            <AccordionTrigger className="text-2xl p-4 font-bold rounded-lg text-left">
+              {company.denumire} ({company.judet})
+            </AccordionTrigger>
+            <AccordionContent className="p-6 text-lg">
+              <p><strong>Judet:</strong> {company.judet}</p>
+              <p><strong>CIF:</strong> {company.cif}</p>
+              <Link
+                href={`/grafic?company=${encodeURIComponent(company.denumire)}`}
+                className="mt-4 inline-block px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+              >
+                View Graph
+              </Link>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    )}
+
+    <Pagination>
+      <PaginationPrevious
+        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+        className={currentPage === 1 ? 'hidden' : ''}
+      />
+      <PaginationContent>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <PaginationItem key={page}>
+            <PaginationLink
+              isActive={page === currentPage}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+      </PaginationContent>
+      <PaginationNext
+        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+        className={currentPage === totalPages ? 'hidden' : ''}
+      />
+    </Pagination>
+  </>
+)}
+
+
+
+
         </div>
 
       </main>
