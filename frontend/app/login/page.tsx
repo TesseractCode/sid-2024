@@ -69,10 +69,10 @@ function Page() {
           </Link>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center text-muted-foreground">
-        ceva ceva
-      </footer>
       {error && <div className="text-red-500">{error}</div>}
+      <footer className="w-full py-4 text-center text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} TesseractCode. All Rights Reserved.
+            </footer>
     </div>
   );
 }

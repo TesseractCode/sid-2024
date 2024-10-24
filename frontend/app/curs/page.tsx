@@ -16,7 +16,7 @@ function Page() {
   const handleExchange = async () => {
     const exchangeValue = parseFloat(exc); // Convert exchange input to a float
     if (!isNaN(exchangeValue) && rate !== null) {
-      const result = exchangeValue * rate; // Perform the exchange calculation
+      const result = exchangeValue / rate; // Perform the exchange calculation
       setRes(result); // Set the result state to display the calculated value
     } else {
       setError("Please enter a valid amount."); // Handle invalid input
@@ -35,15 +35,16 @@ function Page() {
     }
 
     try {
-      const response = await fetch("/api/proxy/get-rate", {
-        method: "POST",
+      // Get the JWT token from cookies or localStorage (depending on how you're storing it)
+      const token = localStorage.getItem('jwtToken'); // Example using localStorage
+
+      const response = await fetch(`http://localhost:3000/api/exchange?currency=${val.toUpperCase()}&date=${selectedDate.toISOString().split("T")[0]}`, {
+        method: "GET", // Use GET as per your backend
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // Send JWT token as Authorization header
         },
-        body: JSON.stringify({
-          currency: val.toUpperCase(), // Send the currency in uppercase
-          date: selectedDate.toISOString().split("T")[0], // Send the date in YYYY-MM-DD format
-        }),
+        credentials: "include", // Ensure cookies (for auth) are included in the request
       });
 
       const data = await response.json();
@@ -54,8 +55,7 @@ function Page() {
         setError("Rate not found for the selected currency and date.");
       }
     } catch (error) {
-        setError("Fetch failed")
-    //   setRate(4.32); // Dummy rate for testing
+      setError("Fetch failed");
     }
   };
 
@@ -116,6 +116,9 @@ function Page() {
       }
 
       {error && <p className="mt-4 text-red-600">{error}</p>}
+      <footer className="w-full pt-12 text-center text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} TesseractCode. All Rights Reserved.
+            </footer>
     </div>
   );
 }
