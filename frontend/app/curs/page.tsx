@@ -116,6 +116,9 @@ function Page() {
       }
 
       {error && <p className="mt-4 text-red-600">{error}</p>}
+      <footer className="w-full pt-20 text-center text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} TesseractCode. All Rights Reserved.
+            </footer>
     </div>
   );
 }

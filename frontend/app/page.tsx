@@ -48,9 +48,9 @@ export default function Home() {
           Log Out
         </Button>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        ceva ceva
-      </footer>
+      <footer className="w-full py-4 text-center text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} YourCompany. All Rights Reserved.
+            </footer>
     </div>
   );
 }
