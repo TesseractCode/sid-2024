@@ -275,8 +275,7 @@ function Page() {
                                 detaliiButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
                               }, 20); // Timeout to wait for the popover to open and render
                             }}
-                            ref={detaliiButtonRef}
-      >
+                            ref={detaliiButtonRef}>
                             Detalii
                           </Button>
                         </PopoverTrigger>
