@@ -20,36 +20,27 @@ import {
 
 
 // Generic MultiLineChart component
-export function MultiLineChart({
+export function SingleLineChart({
   title,
   description,
   data1,
-  data2,
   label1,
-  label2
 }: {
   title: string;
   description: string;
   data1: { year: number; value: number }[]; // Data for first line
-  data2: { year: number; value: number }[]; // Data for second line
   label1: string;
-  label2: string;
 }) {
   // Merge data1 and data2 into a single data array for the chart
   const combinedData = data1.map((item, index) => ({
     year: item.year,
     data1: item.value,
-    data2: data2[index]?.value || 0, // Assume data2 has the same length, or fill with 0 if missing
   }));
 
   const chartConfig = {
     data1: {
       label: label1,
       color: "hsl(var(--chart-1))",
-    },
-    data2: {
-      label: label2,
-      color: "hsl(var(--chart-2))",
     },
   } satisfies ChartConfig;
 
@@ -84,13 +75,6 @@ export function MultiLineChart({
               dataKey="data1"
               type="monotone"
               stroke="var(--color-data1)"
-              strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              dataKey="data2"
-              type="monotone"
-              stroke="var(--color-data2)"
               strokeWidth={2}
               dot={false}
             />
