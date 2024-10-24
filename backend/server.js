@@ -35,6 +35,7 @@ app.use('/api', exchangeRoutes);
 
 // External Search Routes
 app.use('/public', externalSearchRoutes);
+
 // Validate CNP Routes
 app.use('/public', cnpRoutes);
 
