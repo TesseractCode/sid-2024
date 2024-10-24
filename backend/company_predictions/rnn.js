@@ -49,14 +49,13 @@ async function trainModel(model, xTrain, yTrain) {
 
 const itp_cif = 16341004;
 
-// Run the example
 const run = async () => {
     const fetched_data = await fetchData(itp_cif);
     const features = ['cifra_de_afaceri_neta', 'profit_brut'];
     const izolated_data = await izolate_data_on_years(fetched_data, features);
     console.log(izolated_data);
 
-    const k = features.length; // The number of features
+    const k = features.length;
     const normalizer_values = []
     for (let i = 0; i < k; i ++)
     {
@@ -116,7 +115,7 @@ const run = async () => {
     }
     
     // Display the predicted values for 2024
-    console.log(results); // Prints features for 2024
+    console.log(results);
 }
 
 run();
