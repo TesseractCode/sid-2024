@@ -2,23 +2,23 @@ import csv
 import json
 
 # Path to your input CSV file and output CSV files
-csv_file = 'Results/results_Sibiu_2023.csv'  # Ensure this path is correct and the file exists
-output_companies_file = 'FinalDatasets/companiesDataset/sibiu-companies.csv'
-output_indicators_file = 'FinalDatasets/Sibiu/sibiu-indicators-2023.csv'
-output_invalid_names_file = 'FinalDatasets/invalidNames/sibiu-invalid-names.csv'  # New file for invalid names
+csv_file = 'Results/results_Sibiu_2017.csv'  # Ensure this path is correct and the file exists
+#output_companies_file = 'FinalDatasets/companiesDataset/sibiu-companies.csv'
+output_indicators_file = 'FinalDatasets/Sibiu/sibiu-indicators-2017.csv'
+#output_invalid_names_file = 'FinalDatasets/invalidNames/sibiu-invalid-names.csv'  # New file for invalid names
 
 
-# Function to write companies data to the companies CSV file
-def write_companies_csv(companies_data):
-    with open(output_companies_file, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        # Write header
-        writer.writerow(["cif", "company_name", "caen_code", "caen_description"])
-        # Write rows
-        for company in companies_data:
-            writer.writerow(
-                [company['cif'], company['company_name'], company['caen_code'], company['caen_description']]
-            )
+# # Function to write companies data to the companies CSV file
+# def write_companies_csv(companies_data):
+#     with open(output_companies_file, mode='w', newline='', encoding='utf-8') as file:
+#         writer = csv.writer(file)
+#         # Write header
+#         writer.writerow(["cif", "company_name", "caen_code", "caen_description"])
+#         # Write rows
+#         for company in companies_data:
+#             writer.writerow(
+#                 [company['cif'], company['company_name'], company['caen_code'], company['caen_description']]
+#             )
 
 
 # Function to write indicators data to the company_indicators CSV file
@@ -42,15 +42,15 @@ def write_indicators_csv(indicators_data):
             ])
 
 
-# Function to write invalid company names to a CSV file
-def write_invalid_names(invalid_names_data):
-    with open(output_invalid_names_file, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        # Write header
-        writer.writerow(["cif"])
-        # Write rows
-        for cif in invalid_names_data:
-            writer.writerow([cif])
+# # Function to write invalid company names to a CSV file
+# def write_invalid_names(invalid_names_data):
+#     with open(output_invalid_names_file, mode='w', newline='', encoding='utf-8') as file:
+#         writer = csv.writer(file)
+#         # Write header
+#         writer.writerow(["cif"])
+#         # Write rows
+#         for cif in invalid_names_data:
+#             writer.writerow([cif])
 
 
 # Read the CSV file, sort by CIF, and process
@@ -154,7 +154,7 @@ with open(csv_file, newline='', encoding='utf-8') as csvfile:
         # Append indicator data with year defaulted to 2023
         indicators_data.append({
             "cif": cif,
-            "year": 2023,  # Default to 2023
+            "year": 2017,  # Default to 2023
             "i1": I1,
             "i2": I2,
             "i3": I3,
@@ -178,8 +178,8 @@ with open(csv_file, newline='', encoding='utf-8') as csvfile:
         })
 
 # Write the results to CSVs
-write_companies_csv(companies_data)
+#write_companies_csv(companies_data)
 write_indicators_csv(indicators_data)
-write_invalid_names(invalid_names_data)  # Write invalid names to the new CSV file
+#write_invalid_names(invalid_names_data)  # Write invalid names to the new CSV file
 
 print("Data written to CSVs successfully.")
