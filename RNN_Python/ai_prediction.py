@@ -12,19 +12,6 @@ tavily_client = TavilyClient(tavily_api_key)
 open_ai_client = OpenAI()
 open_ai_model = 'gpt-4o'
 
-# data = {'ldp': ['la_doi_pasi.txt', 'La Doi Pasi', 15600976, 4711, 2023],
-#         'itp': ['filtered_data.txt', 'I.T. Perspectives S.R.L.', 16341004, 6201, 2024]}
-#
-# this_data = data['ldp']
-#
-# with open(this_data[0], 'r') as file:
-#     company_history = file.read()
-#
-# company_name = this_data[1]
-# cif = this_data[2]
-# CAEN = this_data[3]
-# year = this_data[4]
-
 
 def tavily_query_generation(caen_set, year):
     completion = open_ai_client.chat.completions.create(
@@ -90,14 +77,14 @@ def predict_values_for_next_year(company_name, last_years_data, tavily_predictio
 
 def company_prediction(company_name, company_history, caen_set, year):
     separator = '-_' * 50
-    print(separator)
+    # print(separator)
 
     query = ("What are the key market trends and technological advancements expected in the software publishing "
              "industry (CAEN code 6201) for the year 2024, and how are they likely to impact the success and growth "
              "of companies operating in this sector?")
     query = tavily_query_generation(caen_set, year)
-    print(query)
-    print(separator)
+    # print(query)
+    # print(separator)
 
     prediction = ("The software publishing industry in 2024 is expected to see key trends and technological "
                   "advancements such as the increased utilization of AI, data analytics, and emerging technologies to "
@@ -111,28 +98,29 @@ def company_prediction(company_name, company_history, caen_set, year):
                   "expected to continue, with a positive impact on revenue growth, indicating the increasing "
                   "importance of data and analytics in driving business decisions and strategies.")
     prediction = tavily_interogation(query)
-    print(prediction)
-    print(separator)
+    # print(prediction)
+    # print(separator)
 
     financial_prediction = predict_values_for_next_year(company_name, company_history, query, prediction)
-    print(financial_prediction)
-    print(separator)
+    # print(financial_prediction)
+    # print(separator)
     return financial_prediction
 
 
-def run(company_name, cif):
-    features = ['cifra_de_afaceri_neta', 'profit_net', 'numar_mediu_de_salariati']
+def make_prediction(company_name, cif, features=None):
+    if features is None:
+        features = ['cifra_de_afaceri_neta', 'profit_net', 'numar_mediu_de_salariati']
 
     raw_api_data = fetch_data(cif)
 
     company_history, caen_set, year = isolate_data_on_years(raw_api_data, features)
 
-    print(company_history)
+    # print(company_history)
 
     prediction = company_prediction(company_name, company_history, caen_set, year)
 
-    with open("answer.txt", "w", encoding="utf-8") as answer_file:
-        answer_file.write(prediction)
+    # with open("answer.txt", "w", encoding="utf-8") as answer_file:
+    #     answer_file.write(prediction)
 
     return prediction
 

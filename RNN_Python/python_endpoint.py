@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify
-from ai_prediction import run
+from ai_prediction import make_prediction
 from contact import get_contacts_in_json
 from description import get_description
+from chatbot import answer_query
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def ai_prediction_endpoint():
     company_name = data.get('company_name')
     cif = data.get('cif')
 
-    prediction = run(company_name, cif)
+    prediction = make_prediction(company_name, cif)
 
     return jsonify({'ai_prediction': prediction})
 
@@ -25,6 +26,16 @@ def contact_endpoint():
     contact = get_contacts_in_json(company_name)
 
     return contact
+
+
+@app.route('/chatbot', methods=['POST'])
+def chatbot_endpoint():
+    data = request.get_json()  # Get the JSON payload from the request
+    query = data.get('query')
+
+    answer = answer_query(query)
+
+    return jsonify({'answer': answer})
 
 
 @app.route('/description', methods=['POST'])

@@ -14,7 +14,7 @@ open_ai_model = 'gpt-4o'
 def get_contacts(company_name):
     query = f'Give me the phone number, email, location and official website for the company {company_name}'
 
-    result = tavily_client.search(query, include_answer=True, max_results=10)
+    result = tavily_client.search(query, include_answer=True, max_results=5)
 
     answer = result['answer']
 
