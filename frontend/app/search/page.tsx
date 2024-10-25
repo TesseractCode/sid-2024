@@ -211,7 +211,7 @@ function Page() {
   }
 
 
-  const handleDetalii = async (cif: any) => {
+  const handleDetalii = async (cif: number) => {
 
     setError('');
   
@@ -221,7 +221,7 @@ function Page() {
     }
   
     try {
-      const response = await fetch(`http://localhost:3000/api/company/16341004/preview-indicators`, {
+      const response = await fetch(`http://localhost:3000/api/company/${cif}/preview-indicators`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ function Page() {
     }
     setTimeout(() => {
       detaliiButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }, 200);
+    }, 20);
   }
 
   
@@ -400,7 +400,7 @@ function Page() {
                   <PopoverContent>
                   <Card className="w-[80vh] mx-auto h-[60vh] mb-8">
                     {/* Check if detailResults and company exist before displaying */}
-                    <div className="p-12 mt-8 ml-auto mr-auto flex flex-col justify-center items-center space-y-4">
+                    <div className="p-12 mt-8 ml-auto mr-auto flex flex-col space-y-4">
                       {detailResults && (
                         <>
                           <p><strong>Nume Companie:</strong> {detailResults.company.company_name}</p>
@@ -410,12 +410,14 @@ function Page() {
                           <p><strong>CIF:</strong> {detailResults.company.cif}</p>
                         </>
                       )}
+                      <div className='flex justify-center items-center'>
                       <Button
                         className="bg-primary text-primary-foreground rounded-full w-32 h-10 flex items-center justify-center"
                         onClick={() => handleRaport(detailResults.company.company_name, detailResults.company.cif)}
                       >
                       Raportul intreg
                       </Button>
+                      </div>
                     </div>
 
                   </Card>
