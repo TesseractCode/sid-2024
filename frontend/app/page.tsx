@@ -50,8 +50,8 @@ export default function Home() {
         </Button>
       </main>
       <footer className="w-full py-4 text-center text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} YourCompany. All Rights Reserved.
-            </footer>
+              &copy; {new Date().getFullYear()} TesseractCode. All Rights Reserved.
+      </footer>
     </div>
   );
 }
