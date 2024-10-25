@@ -12,7 +12,7 @@ import {
 const items = [
   { title: "Home", url: "/", icon: <Home /> },
   { title: "Cautare Companie", url: "/search", icon: <Search /> },
-  { title: "Bilant", url: "/bilant", icon: <LetterText /> },
+  // { title: "Bilant", url: "/bilant", icon: <LetterText /> },
   { title: "Curs Valutar", url: "/curs", icon: <DollarSign /> },
   { title: "Validari CIF, CNP, IBAN", url: "/validari", icon: <Check /> },
   { title: "EFactura", url: "/efactura", icon: <ReceiptText /> },

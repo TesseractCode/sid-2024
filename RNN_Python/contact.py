@@ -44,6 +44,9 @@ def get_contacts_in_json(company_name):
 
     answer = completion.choices[0].message.content
 
+    if not answer.startswith('`'):
+        return answer
+
     start = answer.find("{")
     end = answer.find("}")
 

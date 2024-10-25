@@ -33,6 +33,8 @@ def choose_tools(query):
     answer = completion.choices[0].message.content
 
     # print(answer)
+    if not answer.startswith('`'):
+        return answer
 
     start = answer.find("{")
     # print(start)
@@ -76,4 +78,5 @@ query_1 = 'Give me a short description of the company I.T. Perspectives S.R.L. a
 query_2 = ('Give me a prediction for the net profit of I.T. Perspectives S.R.L. on the year 2024. '
            'Explain your reasoning.')
 query_3 = 'Tell me about the evolution of I.T. Perspectives S.R.L. from 2015 to today.'
-# print(answer_query(query_3))
+query_4 = 'Say "This is a test."'
+# print(answer_query(query_4))

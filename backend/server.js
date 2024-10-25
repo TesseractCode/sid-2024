@@ -44,6 +44,8 @@ app.use('/public', cnpRoutes);
 
 app.use('/api', localCompanyRoutes);
 
+app.use('/public', localCompanyRoutes);
+
 app.use('/public', pythonRoutes);
 
 app.use('/api', insightsRoutes);
