@@ -2,10 +2,10 @@ import csv
 import json
 
 # Path to your input CSV file and output CSV files
-csv_file = 'Results/results_Sibiu_2017.csv'  # Ensure this path is correct and the file exists
-#output_companies_file = 'FinalDatasets/companiesDataset/sibiu-companies.csv'
-output_indicators_file = 'FinalDatasets/Sibiu/sibiu-indicators-2017.csv'
-#output_invalid_names_file = 'FinalDatasets/invalidNames/sibiu-invalid-names.csv'  # New file for invalid names
+csv_file = 'Results/results_Cluj_2018.csv'  # Ensure this path is correct and the file exists
+#output_companies_file = 'FinalDatasets/companiesDataset/cluj-companies.csv'
+output_indicators_file = 'FinalDatasets/Cluj/cluj-indicators-2018.csv'
+#output_invalid_names_file = 'FinalDatasets/invalidNames/cluj-invalid-names.csv'  # New file for invalid names
 
 
 # # Function to write companies data to the companies CSV file
@@ -42,7 +42,7 @@ def write_indicators_csv(indicators_data):
             ])
 
 
-# # Function to write invalid company names to a CSV file
+# Function to write invalid company names to a CSV file
 # def write_invalid_names(invalid_names_data):
 #     with open(output_invalid_names_file, mode='w', newline='', encoding='utf-8') as file:
 #         writer = csv.writer(file)
@@ -154,7 +154,7 @@ with open(csv_file, newline='', encoding='utf-8') as csvfile:
         # Append indicator data with year defaulted to 2023
         indicators_data.append({
             "cif": cif,
-            "year": 2017,  # Default to 2023
+            "year": 2018,  # Default to 2023
             "i1": I1,
             "i2": I2,
             "i3": I3,
