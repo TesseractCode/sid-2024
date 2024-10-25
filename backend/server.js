@@ -8,13 +8,9 @@ const companyRoutes = require('./routes/companyRoutes');
 const exchangeRoutes = require('./routes/exchangeRoutes');
 const externalSearchRoutes = require('./routes/externalSearchRoutes');
 const cnpRoutes = require('./routes/cnpRoutes');
-<<<<<<< Updated upstream
 const localCompanyRoutes = require('./routes/localCompanyRoutes');
 const pythonRoutes = require('./routes/pythonRoutes');
-=======
-const localCompanyRoutes = require('./routes/localCompanyRoutes')
 const comparisonRoutes = require('./routes/comparisonRoutes')
->>>>>>> Stashed changes
 
 require('dotenv').config();
 
@@ -48,11 +44,8 @@ app.use('/public', cnpRoutes);
 
 app.use('/api', localCompanyRoutes);
 
-<<<<<<< Updated upstream
 app.use('/public', pythonRoutes);
-=======
 app.use('/api', comparisonRoutes);
->>>>>>> Stashed changes
 
 
 const PORT = process.env.PORT || 3000;
