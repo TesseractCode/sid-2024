@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -23,6 +23,8 @@ import { Label } from '@/components/ui/label';
 import { Popover, PopoverTrigger } from '@/components/ui/popover';
 import { PopoverContent } from '@radix-ui/react-popover';
 import { Card } from '@/components/ui/card';
+import { useRouter } from 'next/navigation';
+
 
 const ITEMS_PER_PAGE = 5; // Number of items per page
 
@@ -30,7 +32,7 @@ function Page() {
   const [companyName, setCompanyName] = useState('');
   const [judet, setJudet] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [detailResults, setDetailResults] = useState<any[]>([]); // To store search results (now expects an array of objects)
+  const [detailResults, setDetailResults] = useState<any>(null); // To store search results (now expects an array of objects)
   const [error, setError] = useState('');
   const [selectedOption, setSelectedOption] = useState('caut-simpla')
   const [currentPage, setCurrentPage] = useState(1); // State for current page
@@ -41,6 +43,7 @@ function Page() {
   const resultRef = useRef<HTMLDivElement>(null); // Reference to the result section
   const detaliiButtonRef = useRef<HTMLButtonElement>(null); // Add a reference for the button
 
+  const router = useRouter();
 
   const handlePopOver = () => {
     setPopFlag(true);
@@ -75,17 +78,20 @@ function Page() {
   
     try {
       // Send a request to the /public/search endpoint
-      const response = await fetch(`http://localhost:3000/public/search?name=${encodeURIComponent(companyName)}`, {
+      // const response = await fetch(`http://localhost:3000/public/search?name=${encodeURIComponent(companyName)}`, {
+      const response = await fetch(`http://localhost:3000/api/local-search?query=${encodeURIComponent(companyName)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: "include",
       });
   
       const data = await response.json();
   
       if (response.ok && data.companies) {
-        setSearchResults(data.companies); // Set the returned companies in the search results
+        setSearchResults(data.companies);
+        console.log(data.companies) // Set the returned companies in the search results
       } else {
         setError(data.error || 'No companies found.');
       }
@@ -200,6 +206,11 @@ function Page() {
     console.log('Cautare dupa cod CAEN');
   };
 
+  const handleRaport = (company_name: string, cif: number) => {
+    router.push(`/charts?company_name=${encodeURIComponent(company_name)}&cif=${cif}`)
+  }
+
+
   const handleDetalii = async (cif: any) => {
 
     setError('');
@@ -223,7 +234,7 @@ function Page() {
       if (response.ok) {
         setDetailResults(data); // Store the array of data directly
         console.log(data)
-        console.log(detailResults)
+        // console.log(detailResults)
       } else {
         setError(data.error || 'No company found with the provided CIF.');
       }
@@ -234,6 +245,12 @@ function Page() {
       detaliiButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }, 200);
   }
+
+  
+
+  useEffect(() => {
+    console.log(detailResults); // Log detailResults after it's updated
+  }, [detailResults]);
 
   const totalPages = Math.ceil(searchResults.length / ITEMS_PER_PAGE);
   const currentItems = searchResults.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
@@ -334,9 +351,9 @@ function Page() {
               CIF: {company.cif} - Year: {company.year}
             </AccordionTrigger>
             <AccordionContent className="p-6 text-lg">
-              <p><strong>CAEN Code:</strong> {company.caen_code}</p>
-              <p><strong>CAEN Description:</strong> {company.data.caen_descriere}</p>
-              <p><strong>Year:</strong> {company.year}</p>
+              <p><strong>Cod CAEN:</strong> {company.caen_code}</p>
+              <p><strong>Descriere CAEN:</strong> {company.data.caen_descriere}</p>
+              <p><strong>An:</strong> {company.year}</p>
               <p><strong>CIF:</strong> {company.cif}</p>
 
               <h3 className="font-bold mt-4">Financial Data for {company.year}:</h3>
@@ -364,10 +381,10 @@ function Page() {
         {currentItems.map((company, index) => (
           <AccordionItem key={index} value={`item-${index}`} className="flex-grow mb-4 text-left justify-start items-start">
             <AccordionTrigger className="text-2xl p-4 font-bold rounded-lg text-left">
-              {company.denumire} ({company.judet})
+              {company.denumire || company.company_name} ({company.judet || company.county})            
             </AccordionTrigger>
             <AccordionContent className="p-6 text-lg">
-              <p><strong>Judet:</strong> {company.judet}</p>
+              <p><strong>Judet:</strong> {company.judet || company.county}</p>
               <p><strong>CIF:</strong> {company.cif}</p>
               <div className='flex justify-center items-center'>
                 <Popover>
@@ -381,12 +398,27 @@ function Page() {
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent>
-                    <Card className="w-[80vh] mx-auto h-[60vh] mb-8">
-                      {/* <p><strong>CAEN Code:</strong> {detailResults.company.caen_code}</p>
-                      <p><strong>CAEN Description:</strong> {company.data.caen_descriere}</p>
-                      <p><strong>Year:</strong> {company.year}</p>
-                      <p><strong>CIF:</strong> {company.cif}</p> */}
-                    </Card>
+                  <Card className="w-[80vh] mx-auto h-[60vh] mb-8">
+                    {/* Check if detailResults and company exist before displaying */}
+                    <div className="p-12 mt-8 ml-auto mr-auto flex flex-col justify-center items-center space-y-4">
+                      {detailResults && (
+                        <>
+                          <p><strong>Nume Companie:</strong> {detailResults.company.company_name}</p>
+                          <p><strong>Code CAEN:</strong> {detailResults.company.caen_code}</p>
+                          <p><strong>Descriere CAEN:</strong> {detailResults.company.caen_description}</p>
+                          <p><strong>Judet:</strong> {detailResults.company.county}</p>
+                          <p><strong>CIF:</strong> {detailResults.company.cif}</p>
+                        </>
+                      )}
+                      <Button
+                        className="bg-primary text-primary-foreground rounded-full w-32 h-10 flex items-center justify-center"
+                        onClick={() => handleRaport(detailResults.company.company_name, detailResults.company.cif)}
+                      >
+                      Raportul intreg
+                      </Button>
+                    </div>
+
+                  </Card>
                   </PopoverContent>
                 </Popover>
               </div>
