@@ -29,7 +29,8 @@ const ITEMS_PER_PAGE = 5; // Number of items per page
 function Page() {
   const [companyName, setCompanyName] = useState('');
   const [judet, setJudet] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]); // To store search results (now expects an array of objects)
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [detailResults, setDetailResults] = useState<any[]>([]); // To store search results (now expects an array of objects)
   const [error, setError] = useState('');
   const [selectedOption, setSelectedOption] = useState('caut-simpla')
   const [currentPage, setCurrentPage] = useState(1); // State for current page
@@ -199,6 +200,41 @@ function Page() {
     console.log('Cautare dupa cod CAEN');
   };
 
+  const handleDetalii = async (cif: any) => {
+
+    setError('');
+  
+    if (!companyName || companyName.length < 2) {
+      setError("Please enter a valid CIF.");
+      return;
+    }
+  
+    try {
+      const response = await fetch(`http://localhost:3000/api/company/16341004/preview-indicators`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setDetailResults(data); // Store the array of data directly
+        console.log(data)
+        console.log(detailResults)
+      } else {
+        setError(data.error || 'No company found with the provided CIF.');
+      }
+    } catch (error) {
+      setError('An error occurred while fetching the company data.');
+    }
+    setTimeout(() => {
+      detaliiButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 200);
+  }
+
   const totalPages = Math.ceil(searchResults.length / ITEMS_PER_PAGE);
   const currentItems = searchResults.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
@@ -333,12 +369,27 @@ function Page() {
             <AccordionContent className="p-6 text-lg">
               <p><strong>Judet:</strong> {company.judet}</p>
               <p><strong>CIF:</strong> {company.cif}</p>
-              <Link
-                href={`/grafic?company=${encodeURIComponent(company.denumire)}`}
-                className="mt-4 inline-block px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-              >
-                View Graph
-              </Link>
+              <div className='flex justify-center items-center'>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      className="bg-primary text-primary-foreground rounded-full w-32 h-10 flex items-center justify-center"
+                      onClick={() => handleDetalii(company.cif)}
+                      ref={detaliiButtonRef}
+                    >
+                      Detalii
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <Card className="w-[80vh] mx-auto h-[60vh] mb-8">
+                      {/* <p><strong>CAEN Code:</strong> {detailResults.company.caen_code}</p>
+                      <p><strong>CAEN Description:</strong> {company.data.caen_descriere}</p>
+                      <p><strong>Year:</strong> {company.year}</p>
+                      <p><strong>CIF:</strong> {company.cif}</p> */}
+                    </Card>
+                  </PopoverContent>
+                </Popover>
+              </div>
             </AccordionContent>
           </AccordionItem>
         ))}

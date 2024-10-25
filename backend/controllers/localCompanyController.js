@@ -75,6 +75,8 @@ exports.searchCompanyByCifPreview = async (req, res) => {
       throw error;
     }
 
+    console.log(data)
+
     if (data.length === 0) {
       return res.status(404).json({ error: 'Company not found' });
     }
