@@ -62,31 +62,65 @@ const searchCompaniesFromOpenApi = async (searchQuery) => {
     }
 }
 
+
+
 exports.searchCompanyByCifPreview = async (req, res) => {
   const { cif } = req.params;
 
   try {
-    const { data, error } = await supabase
+    const { data: dbData, error: dbError } = await supabase
       .from('companies')
-      .select('*')
+      .select('cif, company_name, caen_code, caen_description, county')
       .eq('cif', cif);
 
-    if (error) {
-      throw error;
+    if (dbError) {
+      throw dbError;
     }
 
-    console.log(data)
-
-    if (data.length === 0) {
-      return res.status(404).json({ error: 'Company not found' });
+    if (dbData.length > 0) {
+      // Company found in the database
+      return res.status(200).json({
+        company: dbData[0],
+      });
     }
 
-    res.status(200).json({ company: data[0] });
+    const response = await axios.get(`https://api.openapi.ro/v1/companies/${cif}`, {
+      headers: {
+        'x-api-key': process.env.OPENAPI_KEY, 
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const openApiCompany = response.data; 
+
+    if (!openApiCompany) {
+      return res.status(404).json({ error: 'Company not found in both database and OpenAPI' });
+    }
+
+    const formattedCompany = {
+      cif: parseInt(openApiCompany.cif), 
+      company_name: openApiCompany.denumire,
+      caen_code: openApiCompany.caen,
+      caen_description: openApiCompany.den_caen,
+      county: openApiCompany.judet,
+    };
+
+    return res.status(200).json({
+      company: formattedCompany
+    });
+
   } catch (error) {
     console.error('Error during CIF search:', error.message);
-    res.status(500).json({ error: 'An error occurred while searching for the company' });
+
+    if (error.response && error.response.data) {
+      res.status(error.response.status).json({ error: error.response.data.message });
+    } else {
+      res.status(500).json({ error: 'An error occurred while searching for the company' });
+    }
   }
 };
+
+
 
 
 exports.getCompanyByCifExtended = async (req, res) => {
@@ -95,7 +129,6 @@ exports.getCompanyByCifExtended = async (req, res) => {
   try {
     console.log(`Fetching company data for CIF: ${cif}`);
 
-    // Fetch company details from 'companies' table
     const { data: companyData, error: companyError } = await supabase
       .from('companies')
       .select('*')
@@ -109,7 +142,6 @@ exports.getCompanyByCifExtended = async (req, res) => {
 
     console.log('Company data fetched:', companyData);
 
-    // Fetch company indicators from 'company_indicators' table
     const { data: indicatorsData, error: indicatorsError } = await supabase
       .from('company_indicators')
       .select(`
@@ -126,7 +158,6 @@ exports.getCompanyByCifExtended = async (req, res) => {
 
     console.log('Company indicators fetched:', indicatorsData);
 
-    // Group indicators by year
     const indicatorsByYear = indicatorsData.map(indicator => ({
       year: indicator.year,
       indicators: {
@@ -155,7 +186,6 @@ exports.getCompanyByCifExtended = async (req, res) => {
 
     console.log('Transformed indicators data:', indicatorsByYear);
 
-    // Send response with company info and indicators
     res.status(200).json({
       company: {
         cif: companyData.cif,
