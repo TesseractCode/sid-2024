@@ -113,3 +113,124 @@ exports.compareCompanyToSector = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+exports.findSimilarCompanies = async (req, res) => {
+    const { cif } = req.query;
+
+    if (!cif) {
+        return res.status(400).json({ error: 'CIF is required.' });
+    }
+
+    try {
+        // Step 1: Fetch the target company by CIF
+        const { data: targetCompany, error: targetCompanyError } = await supabase
+            .from('companies')
+            .select('caen_code, cif')
+            .eq('cif', cif)
+            .single();
+
+        if (targetCompanyError || !targetCompany) {
+            console.error('Error fetching target company:', targetCompanyError?.message || 'No data found.');
+            return res.status(404).json({ error: 'Company not found.' });
+        }
+
+        const caen = targetCompany.caen_code;
+
+        // Step 2: Fetch indicators for the target company for the last year (2023)
+        const { data: targetIndicators, error: targetIndicatorsError } = await supabase
+            .from('company_indicators')
+            .select('i13, i14, i16, i18, i20') // Turnover, Revenue, Gross Profit, Net Profit, Employees
+            .eq('cif', cif)
+            .eq('year', 2023)
+            .single();
+
+        if (targetIndicatorsError || !targetIndicators) {
+            console.error('Error fetching target company indicators:', targetIndicatorsError?.message || 'No data found.');
+            return res.status(404).json({ error: 'Company indicators not found for 2023.' });
+        }
+
+        // Step 3: Fetch companies with the same CAEN code (or similar)
+        const { data: similarCompanies, error: similarCompaniesError } = await supabase
+            .from('companies')
+            .select('cif, company_name')
+            .eq('caen_code', caen);
+
+        if (similarCompaniesError || !similarCompanies || similarCompanies.length === 0) {
+            console.error('Error fetching similar companies:', similarCompaniesError?.message || 'No data found.');
+            return res.status(404).json({ error: 'No similar companies found.' });
+        }
+
+        const similarCIFs = similarCompanies.map(company => company.cif);
+
+        // Step 4: Fetch indicators for the similar companies for 2023, excluding companies with 0 or 1 employees
+        const { data: similarIndicators, error: similarIndicatorsError } = await supabase
+            .from('company_indicators')
+            .select('cif, i13, i14, i16, i18, i20') // Turnover, Revenue, Gross Profit, Net Profit, Employees
+            .in('cif', similarCIFs)
+            .eq('year', 2023)
+            .gt('i20', 1); // Exclude companies with 0 or 1 employees
+
+        if (similarIndicatorsError || !similarIndicators || similarIndicators.length === 0) {
+            console.error('Error fetching similar companies indicators:', similarIndicatorsError?.message || 'No data found.');
+            return res.status(404).json({ error: 'No data found for similar companies.' });
+        }
+
+        // Step 5: Compute similarity scores based on differences in profit, employees, and turnover
+        const computeSimilarity = (target, candidate) => {
+            const profitDiff = Math.abs(target.i18 - candidate.i18);
+            const employeesDiff = Math.abs(target.i20 - candidate.i20);
+            const turnoverDiff = Math.abs(target.i13 - candidate.i13);
+
+            // Calculate the total differences
+            const maxProfit = Math.max(1, target.i18, candidate.i18);  // To avoid division by zero
+            const maxEmployees = Math.max(1, target.i20, candidate.i20);
+            const maxTurnover = Math.max(1, target.i13, candidate.i13);
+
+            // Compute similarity score (0 to 1 scale)
+            const normalizedScore = (
+                (profitDiff / maxProfit) +
+                (employeesDiff / maxEmployees) +
+                (turnoverDiff / maxTurnover)
+            ) / 3; // Average of the normalized differences
+
+            // Convert to a 0-100 scale and return as integer
+            const scaledScore = Math.round((1 - normalizedScore) * 100); // Subtract from 1 to get similarity instead of difference
+
+            return scaledScore;
+        };
+
+        let rankedCompanies = similarIndicators.map(company => ({
+            cif: company.cif,
+            company_name: similarCompanies.find(c => c.cif === company.cif).company_name,
+            similarity_score: computeSimilarity(targetIndicators, company),
+            indicators: {
+                turnover: company.i13,
+                total_revenue: company.i14,
+                gross_profit: company.i16,
+                net_profit: company.i18,
+                employees: company.i20
+            }
+        }));
+
+        // Step 6: Remove the target company from the list
+        rankedCompanies = rankedCompanies.filter(company => company.cif !== parseInt(cif));
+
+        // Step 7: Sort by similarity score (ascending) and return the top 4 companies
+        const topSimilarCompanies = rankedCompanies
+            .sort((a, b) => b.similarity_score - a.similarity_score) // Descending order (most similar first)
+            .slice(0, 4); // Top 4 most similar companies
+
+        // Step 8: Return the result
+        res.status(200).json({
+            target_company: {
+                cif: targetCompany.cif,
+                indicators: targetIndicators
+            },
+            similar_companies: topSimilarCompanies
+        });
+
+    } catch (error) {
+        console.error('Error finding similar companies:', error.message);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
