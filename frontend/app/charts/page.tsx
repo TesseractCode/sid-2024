@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Progress } from "@/components/ui/progress"; // Import the Progress component from Shadcn
 
 interface CompanyIndicator {
   year: number;
@@ -46,16 +47,134 @@ interface APIResponse {
   indicators: CompanyIndicator[];
 }
 
+interface SimilarCompany {
+    cif: number;
+    company_name: string;
+    similarity_score: number;
+    indicators: {
+      turnover: number;
+      total_revenue: number;
+      gross_profit: number;
+      net_profit: number;
+      employees: number;
+    };
+  }
+  
+
+interface SectorData {
+    total_companies_in_sector: number;
+    sector_averages: {
+      avg_turnover: number;
+      avg_total_revenue: number;
+      avg_gross_profit: number;
+      avg_net_profit: number;
+      avg_employees: number;
+    };
+    company_indicators: {
+      year: number;
+      indicators: CompanyIndicator['indicators'];
+    };
+    differences: {
+      turnover_diff: number;
+      total_revenue_diff: number;
+      gross_profit_diff: number;
+      net_profit_diff: number;
+      employees_diff: number;
+    };
+    percentage_differences: {
+      turnover_diff_percentage: number;
+      total_revenue_diff_percentage: number;
+      gross_profit_diff_percentage: number;
+      net_profit_diff_percentage: number;
+      employees_diff_percentage: number;
+    };
+  }
+
 function Page() {
   const searchParams = useSearchParams();
   const [companyIndicators, setCompanyIndicators] = useState<CompanyIndicator[]>([]);
   const [companyName, setCompanyName] = useState<string | null>(null);
   const [prev, setPrev] = useState<any>(null);
   const [cif, setCif] = useState<string | null>(null);
+  const [companyData, setCompanyData] = useState<any>(null);
+  const [sectorData, setSectorData] = useState<SectorData | null>(null);
+  const [similarCompanies, setSimilarCompanies] = useState<SimilarCompany[] | null>(null);
+  const [riskAssessment, setRiskAssessment] = useState<any>(null);
+  const [description, setDescription] = useState<string | undefined>(undefined);
+
   
   const queryCif = searchParams.get("cif");
   const queryCompanyName = searchParams.get("company_name");
 
+
+  const fetchRiskAssessment = async (cif: string | null) => {
+    if (!cif) return;
+  
+    try {
+      const response = await fetch(`http://localhost:3000/api/company-risk-assessment?cif=${cif}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setRiskAssessment(data); // Store the risk assessment data
+      } else {
+        console.error('Error fetching risk assessment');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
+
+  const fetchSimilarCompanies = async (cif: string | null) => {
+    if (!cif) return;
+  
+    try {
+      const response = await fetch(`http://localhost:3000/api/find-similar-companies?cif=${cif}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setSimilarCompanies(data.similar_companies); // Store the similar companies data
+      } else {
+        console.error('Error fetching similar companies');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
+
+  const fetchSectorData = async (cif: string | null) => {
+    if (!cif) return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/compare-company-sector?cif=${cif}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        const data: SectorData = await response.json();
+        setSectorData(data); // Store the sector data
+      } else {
+        console.error('Error fetching sector data');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
   const fetchCompanyIndicators = async (cif: string | null) => {
     if (!cif) return;
 
@@ -102,12 +221,53 @@ function Page() {
       console.error('Fetch error:', error);
     }
   };
+  const fetchDescription = async (companyName: string | null) => {
+    if (!companyName) return 'No company name provided';
+  
+    try {
+      const response = await fetch(`http://localhost:3000/public/description`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ company_name: companyName }),
+      });
+  
+      if (response.ok) {
+        const data = await response.text(); // Since the backend returns a string
+        return data;
+      } else {
+        console.error('Error fetching company description');
+        return 'Error fetching description';
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+      return 'Fetch error';
+    }
+  };
+  
+  
+  // Usage in your component (inside useEffect or another relevant part)
+  useEffect(() => {
+    const getDescription = async () => {
+      const desc = await fetchDescription(queryCompanyName); // Replace queryCompanyName with the actual company name
+      setDescription(desc);
+    };
+  
+    getDescription();
+  }, [queryCompanyName]);
+  
 
   // UseEffect to trigger the fetch
   useEffect(() => {
     fetchCompanyIndicators(queryCif);
     fetchCAEN(queryCif);
+    fetchSectorData(queryCif);
+    fetchSimilarCompanies(queryCif);
+    fetchRiskAssessment(queryCif);
   }, [queryCif]);
+
+  
 
   if (companyIndicators.length === 0) {
     return <div>Loading data...</div>;
@@ -140,6 +300,7 @@ function Page() {
         <p><strong>Descriere CAEN:</strong> {prev.company.caen_description}</p>
         <p><strong>Judet:</strong> {prev.company.county}</p>
         <p><strong>CIF:</strong> {prev.company.cif}</p>
+        {/* {description} */}
         </div>
 
       <SingleLineChart
@@ -211,6 +372,137 @@ function Page() {
           ))}
         </TableBody>
       </Table>
+
+      {sectorData && (
+        <div className="space-y-4 mt-8">
+          <h2 className="text-xl font-semibold">Comparatie pe Sector</h2>
+          <p><strong>Code CAEN:</strong> {prev.company.caen_code}</p>
+            <p><strong>Descriere CAEN:</strong> {prev.company.caen_description}</p>
+
+          <div>
+            <p className="mb-2">Turnover Difference: {sectorData.percentage_differences.turnover_diff_percentage.toFixed(2)}%</p>
+            <Progress value={sectorData.percentage_differences.turnover_diff_percentage} className="w-full" />
+          </div>
+
+          <div>
+            <p className="mb-2">Total Revenue Difference: {sectorData.percentage_differences.total_revenue_diff_percentage.toFixed(2)}%</p>
+            <Progress value={sectorData.percentage_differences.total_revenue_diff_percentage} className="w-full" />
+          </div>
+
+          <div>
+            <p className="mb-2">Gross Profit Difference: {sectorData.percentage_differences.gross_profit_diff_percentage.toFixed(2)}%</p>
+            <Progress value={sectorData.percentage_differences.gross_profit_diff_percentage} className="w-full" />
+          </div>
+
+          <div>
+            <p className="mb-2">Net Profit Difference: {sectorData.percentage_differences.net_profit_diff_percentage.toFixed(2)}%</p>
+            <Progress value={sectorData.percentage_differences.net_profit_diff_percentage} className="w-full" />
+          </div>
+
+          <div>
+            <p className="mb-2">Employees Difference: {sectorData.percentage_differences.employees_diff_percentage.toFixed(2)}%</p>
+            <Progress value={sectorData.percentage_differences.employees_diff_percentage} className="w-full" />
+          </div>
+        </div>
+      )}
+      {similarCompanies && (
+  <div className="space-y-4 mt-8">
+    <h2 className="text-xl font-semibold">Similar Companies</h2>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Company Name</TableHead>
+          <TableHead>Turnover</TableHead>
+          <TableHead>Net Profit</TableHead>
+          <TableHead>Employees</TableHead>
+          <TableHead>Similarity Score</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {similarCompanies.map((company) => (
+          <TableRow key={company.cif}>
+            <TableCell>{company.company_name}</TableCell>
+            <TableCell>{company.indicators.turnover}</TableCell>
+            <TableCell>{company.indicators.net_profit}</TableCell>
+            <TableCell>{company.indicators.employees}</TableCell>
+            <TableCell>{company.similarity_score}%</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </div>
+)}
+{riskAssessment && (
+  <div className="space-y-4 mt-8">
+    <h2 className="text-xl font-semibold">Risk Assessment</h2>
+    <p>Risk Score: {riskAssessment.risk_score}</p>
+    <ul>
+      {riskAssessment.risk_factors.map((factor: any, index: any) => (
+        <li key={index}>- {factor}</li>
+      ))}
+    </ul>
+    <div className="mt-4 space-y-4">
+    <h3 className="text-lg font-semibold">Metrics</h3>
+
+    {/* Average Debt to Equity (no progress bar since it's not a percentage) */}
+    <p>
+        Average Debt to Equity: {riskAssessment.metrics.averageDebtToEquity !== null
+        ? riskAssessment.metrics.averageDebtToEquity.toFixed(2)
+        : 'NO DATA'}
+    </p>
+
+    {/* Average Profit Margin */}
+    <p className="mb-2">
+        Average Profit Margin: {riskAssessment.metrics.averageProfitMargin !== null
+        ? `${riskAssessment.metrics.averageProfitMargin.toFixed(2)}%`
+        : 'NO DATA'}
+    </p>
+    {riskAssessment.metrics.averageProfitMargin !== null && (
+        <Progress value={Math.min(riskAssessment.metrics.averageProfitMargin, 100)} className="w-full" />
+    )}
+
+    {/* Average Revenue Growth */}
+    <p className="mb-2">
+        Average Revenue Growth: {riskAssessment.metrics.averageRevenueGrowth !== null
+        ? `${riskAssessment.metrics.averageRevenueGrowth.toFixed(2)}%`
+        : 'NO DATA'}
+    </p>
+    {riskAssessment.metrics.averageRevenueGrowth !== null && (
+        <Progress value={Math.min(riskAssessment.metrics.averageRevenueGrowth, 100)} className="w-full" />
+    )}
+
+    {/* Average Profit Growth */}
+    <p className="mb-2">
+        Average Profit Growth: {riskAssessment.metrics.averageProfitGrowth !== null
+        ? `${riskAssessment.metrics.averageProfitGrowth.toFixed(2)}%`
+        : 'NO DATA'}
+    </p>
+    {riskAssessment.metrics.averageProfitGrowth !== null && (
+        <Progress value={Math.min(riskAssessment.metrics.averageProfitGrowth, 100)} className="w-full" />
+    )}
+
+    {/* Average Employee Growth */}
+    <p className="mb-2">
+        Average Employee Growth: {riskAssessment.metrics.averageEmployeeGrowth !== null
+        ? `${riskAssessment.metrics.averageEmployeeGrowth.toFixed(2)}%`
+        : 'NO DATA'}
+    </p>
+    {riskAssessment.metrics.averageEmployeeGrowth !== null && (
+        <Progress value={Math.min(riskAssessment.metrics.averageEmployeeGrowth, 100)} className="w-full" />
+    )}
+
+    {/* Profit Volatility Count (assuming this is not a percentage) */}
+    <p>
+        Profit Volatility Count: {riskAssessment.metrics.profitVolatilityCount !== null
+        ? riskAssessment.metrics.profitVolatilityCount
+        : 'NO DATA'}
+    </p>
+</div>
+
+
+  </div>
+)}
+
       <footer className="w-full pt-12 text-center text-sm text-muted-foreground">
         &copy; {new Date().getFullYear()} TesseractCode. All Rights Reserved.
       </footer>
