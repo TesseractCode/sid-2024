@@ -57,8 +57,9 @@ def predict_values_for_next_year(company_name, last_years_data, tavily_predictio
                            "you will make a prediction of the company's data for the next year. "
                            "The user will also give you information about a question they asked Tavily AI about the "
                            "Business area that the company is in and about the answer they received. "
-                           "Take the Tavily AI prediction into consideration when making your prediction. "
-                           "Don't fall in the trap of wishfull thinking; make predictions based on facts.",
+                           "Take the Tavily AI prediction into consideration when making your prediction, "
+                           "but don't mention the AI. "
+                           "Don't fall in the trap of wishfull thinking; make predictions based on facts. ",
             },
             {
                 'role': "user",
@@ -79,24 +80,10 @@ def company_prediction(company_name, company_history, caen_set, year):
     separator = '-_' * 50
     # print(separator)
 
-    query = ("What are the key market trends and technological advancements expected in the software publishing "
-             "industry (CAEN code 6201) for the year 2024, and how are they likely to impact the success and growth "
-             "of companies operating in this sector?")
     query = tavily_query_generation(caen_set, year)
     # print(query)
     # print(separator)
 
-    prediction = ("The software publishing industry in 2024 is expected to see key trends and technological "
-                  "advancements such as the increased utilization of AI, data analytics, and emerging technologies to "
-                  "drive innovation and enhance recurring revenue streams. Cloud computing, artificial intelligence ("
-                  "AI), and cybersecurity are likely to play crucial roles in the industry's growth and innovation "
-                  "efforts. Companies focusing on enterprise spending on software and IT services are expected to "
-                  "leverage these technologies to drive success and competitiveness in the market. Additionally, "
-                  "the industry is likely to see a greater emphasis on sustainability reporting, particularly in data "
-                  "centers, reflecting a growing awareness of environmental concerns and the need for responsible "
-                  "business practices. The presence of Chief Data Officers (CDOs) in leading companies is also "
-                  "expected to continue, with a positive impact on revenue growth, indicating the increasing "
-                  "importance of data and analytics in driving business decisions and strategies.")
     prediction = tavily_interogation(query)
     # print(prediction)
     # print(separator)

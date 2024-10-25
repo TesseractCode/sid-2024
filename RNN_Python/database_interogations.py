@@ -1,15 +1,18 @@
-data = {3099430: "Ambient S.A.",
-        16341004: "I.T. Perspectives S.R.L.",
-        15600976: "La Doi Pasi",
-        23528022: "Tarom"}
+import requests
+import json
 
 
 def get_company_name_by_cif(cif):
-    return data[cif] or None
+    url = f'http://localhost:3000/public/company/{cif}/preview-indicators'
+    response = requests.get(url)
+    text = response.text
+    dictionary = json.loads(text)
+    return dictionary['company']['company_name']
 
 
 def get_company_cif_by_name(name):
-    for k, v in data.items():
-        if v == name:
-            return k
-    return None
+    url = f'http://localhost:3000/public/local-search?query={name}'
+    response = requests.get(url)
+    text = response.text
+    dictionary = json.loads(text)
+    return dictionary['companies'][0]['cif']
