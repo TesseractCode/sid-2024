@@ -8,7 +8,8 @@ const companyRoutes = require('./routes/companyRoutes');
 const exchangeRoutes = require('./routes/exchangeRoutes');
 const externalSearchRoutes = require('./routes/externalSearchRoutes');
 const cnpRoutes = require('./routes/cnpRoutes');
-const localCompanyRoutes = require('./routes/localCompanyRoutes')
+const localCompanyRoutes = require('./routes/localCompanyRoutes');
+const pythonRoutes = require('./routes/pythonRoutes');
 
 require('dotenv').config();
 
@@ -41,6 +42,8 @@ app.use('/public', externalSearchRoutes);
 app.use('/public', cnpRoutes);
 
 app.use('/api', localCompanyRoutes);
+
+app.use('/public', pythonRoutes);
 
 
 const PORT = process.env.PORT || 3000;

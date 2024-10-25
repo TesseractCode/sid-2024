@@ -51,7 +51,7 @@ exports.searchCompanies = async (req, res) => {
 exports.getCompanyData = async (req, res) => {
   const { cif } = req.params;
 
-console.log(`https://api.openapi.ro/api/companies/${cif}/balances`);
+  // console.log(`https://api.openapi.ro/api/companies/${cif}/balances`);
 
   try {
     const response = await axios.get(`https://api.openapi.ro/api/companies/${cif}/balances`, {

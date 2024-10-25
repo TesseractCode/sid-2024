@@ -7,7 +7,7 @@ async function get_chatbot_answer(query) {
         });
         
         const answer = response.data.answer;
-        console.log(answer);
+        // console.log(answer);
         return answer;
     } catch (error) {
         console.error('Error calling Python API:', error);
@@ -15,6 +15,6 @@ async function get_chatbot_answer(query) {
     }
 }
 
-get_chatbot_answer('Tell me about the evolution of I.T. Perspectives S.R.L. from 2015 to today.');
+// get_chatbot_answer('Tell me about the evolution of I.T. Perspectives S.R.L. from 2015 to today.');
 
 module.exports = { get_chatbot_answer };
