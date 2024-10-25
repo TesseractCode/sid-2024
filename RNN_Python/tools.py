@@ -78,11 +78,27 @@ company_future_prospects_generator = {'name': 'company_future_prospects_generato
                                       'output_format': 'prospect',
                                       'output_constraints': 'prospect is a string containing the prediction'}
 
+company_cif_by_name = {'name': 'company_cif_by_name',
+                               'description': 'returns the cif of a company by knowing it\'s name',
+                               'input_format': 'name',
+                               'input_constraints': 'name is a string',
+                               'output_format': 'cif',
+                               'output_constraints': 'cif is a number'}
+
+company_name_by_cif = {'name': 'company_name_by_cif',
+                               'description': 'returns the name of a company by knowing it\'s cif',
+                               'input_format': 'cif',
+                               'input_constraints': 'cif is a number',
+                               'output_format': 'name',
+                               'output_constraints': 'name is a string'}
+
 tool_descriptions = [
     company_data_fetcher,
     company_contact_fetcher,
     company_description_generator,
-    company_future_prospects_generator
+    company_future_prospects_generator,
+    company_cif_by_name,
+    company_name_by_cif
 ]
 
 
@@ -147,11 +163,21 @@ def company_future_prospects_generator_tool(input_data):
     return make_prediction(name, cif, features)
 
 
+def company_cif_by_name_tool(input_data):
+    return get_company_cif_by_name(input_data)
+
+
+def company_name_by_cif_tool(input_data):
+    return get_company_name_by_cif(input_data)
+
+
 tools = {
     company_data_fetcher['name']: company_data_fetcher_tool,
     company_contact_fetcher['name']: company_contact_fetcher_tool,
     company_description_generator['name']: company_description_generator_tool,
-    company_future_prospects_generator['name']: company_future_prospects_generator_tool
+    company_future_prospects_generator['name']: company_future_prospects_generator_tool,
+    company_cif_by_name['name']: company_cif_by_name_tool,
+    company_name_by_cif['name']: company_name_by_cif_tool
 }
 
 

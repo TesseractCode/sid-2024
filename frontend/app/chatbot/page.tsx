@@ -1,45 +1,40 @@
-"use client";  // Ensure the component is a Client Component
+"use client";
 
-import { useState } from "react";
-import { FaPaperPlane } from "react-icons/fa";  // Import FontAwesome paper plane icon
-import { getAnswer } from "./chat_response"; // Import the getAnswer function
+import { useState, useEffect } from "react";
+import { FaPaperPlane } from "react-icons/fa";
+import { getAnswer } from "./chat_response";
 
-// Define a type for messages
 type Message = {
     type: "user" | "bot";
     text: string;
 };
 
 function ChatbotPage() {
-    // State to manage the chat messages with explicit type
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputMessage, setInputMessage] = useState("");
+    const [loading, setLoading] = useState(false); // New state for loading
 
-    // Handler to send a message
     const sendMessage = async () => {
         if (inputMessage.trim() !== "") {
-            // Append user message to the chat
             const userMessage: Message = { type: "user", text: inputMessage };
             setMessages((prevMessages) => [...prevMessages, userMessage]);
-
-            // Clear input field
             setInputMessage("");
+            setLoading(true); // Start loading when bot response is pending
 
-            // Fetch the bot's response using getAnswer
             try {
                 const botResponseText = await getAnswer(inputMessage);
                 const botResponse: Message = { type: "bot", text: botResponseText };
                 setMessages((prevMessages) => [...prevMessages, botResponse]);
             } catch (error) {
-                // Handle error (optional)
                 console.error('Error fetching bot response:', error);
                 const errorMessage: Message = { type: "bot", text: "Sorry, I couldn't get an answer at the moment." };
                 setMessages((prevMessages) => [...prevMessages, errorMessage]);
+            } finally {
+                setLoading(false); // Stop loading when bot response is complete
             }
         }
     };
 
-    // Handler for pressing enter key
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
             sendMessage();
@@ -67,6 +62,15 @@ function ChatbotPage() {
                             {message.text}
                         </div>
                     ))}
+                    {loading && (
+                        <div className="bot-typing my-2 p-2 max-w-sm bg-gray-300 text-black text-left mr-auto rounded-2xl flex items-center">
+                            <div className="typing-indicator">
+                                <span className="dot">.</span>
+                                <span className="dot">.</span>
+                                <span className="dot">.</span>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className="input-container flex p-4 bg-transparent border-t mt-4">
@@ -88,35 +92,51 @@ function ChatbotPage() {
             </div>
 
             <footer className="w-full py-4 text-center text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} TesseractCode. All Rights Reserved.
+                &copy; {new Date().getFullYear()} TesseractCode. All Rights Reserved.
             </footer>
 
             <style jsx>{`
-                /* Custom Scrollbar Styles */
                 .custom-scrollbar::-webkit-scrollbar {
-                    width: 8px; /* Adjust width */
+                    width: 8px;
                 }
-
                 .custom-scrollbar::-webkit-scrollbar-track {
-                    background: transparent; /* Transparent track */
+                    background: transparent;
                 }
-
                 .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: rgba(0, 0, 0, 0.5); /* Semi-transparent thumb */
-                    border-radius: 10px; /* Rounded edges */
+                    background: rgba(0, 0, 0, 0.5);
+                    border-radius: 10px;
                 }
-
                 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                    background: rgba(0, 0, 0, 0.7); /* Darker on hover */
+                    background: rgba(0, 0, 0, 0.7);
                 }
-
                 .custom-scrollbar {
-                    scrollbar-width: thin; /* Firefox */
-                    scrollbar-color: rgba(48, 48, 72, 0.5) transparent; /* Firefox */
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(48, 48, 72, 0.5) transparent;
                 }
-
                 .custom-scrollbar:hover {
-                    scrollbar-color: rgba(48, 48, 72, 0.7) transparent; /* Darker on hover for Firefox */
+                    scrollbar-color: rgba(48, 48, 72, 0.7) transparent;
+                }
+                /* Typing animation */
+                .typing-indicator .dot {
+                    display: inline-block;
+                    margin-right: 3px;
+                    font-size: 24px;
+                    line-height: 1;
+                    animation: blink 1s infinite alternate;
+                }
+                .typing-indicator .dot:nth-child(2) {
+                    animation-delay: 0.2s;
+                }
+                .typing-indicator .dot:nth-child(3) {
+                    animation-delay: 0.4s;
+                }
+                @keyframes blink {
+                    0% {
+                        opacity: 0.3;
+                    }
+                    100% {
+                        opacity: 1;
+                    }
                 }
             `}</style>
         </div>
