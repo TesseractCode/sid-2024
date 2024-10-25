@@ -10,7 +10,7 @@ const externalSearchRoutes = require('./routes/externalSearchRoutes');
 const cnpRoutes = require('./routes/cnpRoutes');
 const localCompanyRoutes = require('./routes/localCompanyRoutes');
 const pythonRoutes = require('./routes/pythonRoutes');
-const comparisonRoutes = require('./routes/comparisonRoutes')
+const insightsRoutes = require('./routes/insightsRoutes')
 
 require('dotenv').config();
 
@@ -45,7 +45,8 @@ app.use('/public', cnpRoutes);
 app.use('/api', localCompanyRoutes);
 
 app.use('/public', pythonRoutes);
-app.use('/api', comparisonRoutes);
+
+app.use('/api', insightsRoutes);
 
 
 const PORT = process.env.PORT || 3000;

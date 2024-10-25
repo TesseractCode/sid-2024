@@ -234,3 +234,138 @@ exports.findSimilarCompanies = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+exports.companyRiskAssessment = async (req, res) => {
+    const { cif } = req.query;
+
+    if (!cif) {
+        return res.status(400).json({ error: 'CIF is required.' });
+    }
+
+    try {
+        // Step 1: Fetch historical indicators for the company
+        const { data: historicalIndicators, error: indicatorsError } = await supabase
+            .from('company_indicators')
+            .select('year, i7, i10, i13, i14, i16, i18, i20') // Select Debt (i7), Equity (i10), Revenue (i13, i14), Profit (i16, i18), Employees (i20)
+            .eq('cif', cif)
+            .order('year', { ascending: true });
+
+        if (indicatorsError || !historicalIndicators || historicalIndicators.length === 0) {
+            console.error('Error fetching company indicators:', indicatorsError?.message || 'No data found.');
+            return res.status(404).json({ error: 'Company indicators not found.' });
+        }
+
+        // Step 2: Calculate Financial Ratios and Trends for Risk Assessment
+        let totalYears = historicalIndicators.length;
+        let totalDebtToEquity = 0;
+        let totalProfitMargin = 0;
+        let totalRevenueGrowth = 0;
+        let totalProfitGrowth = 0;
+        let totalEmployeeGrowth = 0;
+        let previousRevenue = null;
+        let previousProfit = null;
+        let previousEmployees = null;
+        let volatilityCount = 0;
+
+        historicalIndicators.forEach((yearData, index) => {
+            const { i7: debt, i10: equity, i13: revenue, i14: totalRevenue, i18: netProfit, i20: employees } = yearData;
+
+            // Calculate debt-to-equity ratio
+            if (equity > 0) {
+                const debtToEquity = debt / equity;
+                totalDebtToEquity += debtToEquity;
+            }
+
+            // Calculate profit margin
+            if (totalRevenue > 0) {
+                const profitMargin = (netProfit / totalRevenue) * 100;
+                totalProfitMargin += profitMargin;
+            }
+
+            // Revenue growth calculation
+            if (previousRevenue !== null && revenue > 0) {
+                const revenueGrowth = ((revenue - previousRevenue) / previousRevenue) * 100;
+                totalRevenueGrowth += revenueGrowth;
+            }
+
+            // Profit growth calculation
+            if (previousProfit !== null && netProfit > 0) {
+                const profitGrowth = ((netProfit - previousProfit) / previousProfit) * 100;
+                totalProfitGrowth += profitGrowth;
+            }
+
+            // Employee growth calculation
+            if (previousEmployees !== null && employees > 0) {
+                const employeeGrowth = ((employees - previousEmployees) / previousEmployees) * 100;
+                totalEmployeeGrowth += employeeGrowth;
+            }
+
+            // Volatility check (high fluctuations in profit margins)
+            if (index > 0 && netProfit > 0 && previousProfit > 0) {
+                const volatility = Math.abs((netProfit - previousProfit) / previousProfit) * 100;
+                if (volatility > 20) { // Consider 20% change as volatile
+                    volatilityCount++;
+                }
+            }
+
+            previousRevenue = revenue;
+            previousProfit = netProfit;
+            previousEmployees = employees;
+        });
+
+        // Step 3: Calculate averages over the years
+        const averageDebtToEquity = totalDebtToEquity / totalYears;
+        const averageProfitMargin = totalProfitMargin / totalYears;
+        const averageRevenueGrowth = totalRevenueGrowth / (totalYears - 1);
+        const averageProfitGrowth = totalProfitGrowth / (totalYears - 1);
+        const averageEmployeeGrowth = totalEmployeeGrowth / (totalYears - 1);
+
+        // Step 4: Determine risk based on thresholds
+        let riskScore = 0;
+        const riskAssessment = [];
+
+        if (averageDebtToEquity > 2) {
+            riskScore += 20; // Higher risk due to high debt
+            riskAssessment.push('High debt-to-equity ratio');
+        }
+        if (averageProfitMargin < 5) {
+            riskScore += 20; // Low profitability
+            riskAssessment.push('Low profit margin');
+        }
+        if (averageRevenueGrowth < 0) {
+            riskScore += 20; // Declining revenue
+            riskAssessment.push('Negative revenue growth');
+        }
+        if (averageProfitGrowth < 0) {
+            riskScore += 20; // Declining profit
+            riskAssessment.push('Negative profit growth');
+        }
+        if (volatilityCount > 2) {
+            riskScore += 20; // High volatility in profits
+            riskAssessment.push('High profit volatility');
+        }
+
+        // Normalize the risk score to a 0-100 scale (max risk = 100)
+        riskScore = Math.min(100, riskScore);
+
+        // Step 5: Return the risk assessment
+        res.status(200).json({
+            company_cif: cif,
+            risk_score: riskScore,
+            risk_factors: riskAssessment,
+            metrics: {
+                averageDebtToEquity,
+                averageProfitMargin,
+                averageRevenueGrowth,
+                averageProfitGrowth,
+                averageEmployeeGrowth,
+                profitVolatilityCount: volatilityCount
+            }
+        });
+
+    } catch (error) {
+        console.error('Error performing risk assessment:', error.message);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
