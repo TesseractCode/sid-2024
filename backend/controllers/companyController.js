@@ -60,6 +60,8 @@ console.log(`https://api.openapi.ro/api/companies/${cif}/balances`);
       },
     });
 
+    console.log(response.data)
+
 
     res.status(200).json(response.data);
   } catch (error) {
