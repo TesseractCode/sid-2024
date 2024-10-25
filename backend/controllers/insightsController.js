@@ -244,7 +244,6 @@ exports.companyRiskAssessment = async (req, res) => {
     }
 
     try {
-        // Step 1: Fetch historical indicators for the company
         const { data: historicalIndicators, error: indicatorsError } = await supabase
             .from('company_indicators')
             .select('year, i7, i10, i13, i14, i16, i18, i20') // Select Debt (i7), Equity (i10), Revenue (i13, i14), Profit (i16, i18), Employees (i20)
@@ -256,7 +255,6 @@ exports.companyRiskAssessment = async (req, res) => {
             return res.status(404).json({ error: 'Company indicators not found.' });
         }
 
-        // Step 2: Calculate Financial Ratios and Trends for Risk Assessment
         let totalYears = historicalIndicators.length;
         let totalDebtToEquity = 0;
         let totalProfitMargin = 0;
